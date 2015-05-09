@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "Pawn.h"
 
 namespace Chess {
 	Board::Board() {
@@ -6,6 +7,16 @@ namespace Chess {
 			for (int y = 0; y < 8; y++) {
 				pieces[x][y] = nullptr;
 			}
+		}
+
+		// Black pawns
+		for (int x = 0; x < 8; x++) {
+			pieces[x][1] = new Pawn(Position(x, 1), false);
+		}
+
+		// White pawns
+		for (int x = 0; x < 8; x++) {
+			pieces[x][6] = new Pawn(Position(x, 6), true);
 		}
 	}
 
