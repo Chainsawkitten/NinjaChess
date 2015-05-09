@@ -2,8 +2,11 @@
 #define PIECE_H
 
 #include "Position.h"
+#include <vector>
 
 namespace Chess {
+	class Board;
+
 	/// A piece on the board.
 	class Piece {
 		public:
@@ -19,6 +22,13 @@ namespace Chess {
 			 * @return Whether the piece belongs to the white player
 			 */
 			bool isWhite() const;
+
+			/// Get valid moves.
+			/**
+			 * @param board %Board.
+			 * @return A list of all the valid moves.
+			 */
+			virtual std::vector<Position> validMoves(const Board& board) const;
 
 			/// Get the notation of the piece.
 			/**
