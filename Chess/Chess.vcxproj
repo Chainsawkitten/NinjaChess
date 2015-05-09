@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Position.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Position.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3A07A556-AF0E-417D-ADEA-B572CFAE4C0D}</ProjectGuid>
