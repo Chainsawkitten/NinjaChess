@@ -42,7 +42,7 @@ void printValidMoves(const Chess::Board& board, const Chess::Position& position)
 	} else {
 		std::vector<Chess::Position> moves = piece->validMoves(board);
 		for (Chess::Position move : moves) {
-			cout << "x: " << move.x << ", y: " << move.y << endl;
+			cout << "x: " << (move.x + 1) << ", y: " << (move.y + 1) << endl;
 		}
 	}
 }
