@@ -2,6 +2,7 @@
 #include "Pawn.h"
 #include "Rook.h"
 #include "Knight.h"
+#include "Bishop.h"
 
 namespace Chess {
 	Board::Board() {
@@ -32,6 +33,12 @@ namespace Chess {
 		pieces[6][0] = new Knight(Position(6, 0), false);
 		pieces[1][7] = new Knight(Position(1, 7), true);
 		pieces[6][7] = new Knight(Position(6, 7), true);
+
+		// Bishop
+		pieces[2][0] = new Bishop(Position(2, 0), false);
+		pieces[5][0] = new Bishop(Position(5, 0), false);
+		pieces[2][7] = new Bishop(Position(2, 7), true);
+		pieces[5][7] = new Bishop(Position(5, 7), true);
 	}
 
 	Board::~Board() {
