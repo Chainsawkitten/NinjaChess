@@ -12,7 +12,12 @@ int main() {
 	cout << "Check valid moves for position:" << endl;
 	int x, y;
 	cin >> x >> y;
-	printValidMoves(board, Chess::Position(x-1, y-1));
+	Chess::Position position(x-1, y-1);
+	if (position.valid()) {
+		printValidMoves(board, position);
+	} else {
+		cout << "Position out of bounds." << endl;
+	}
 
 	cin.ignore();
 	cin.get();
@@ -21,7 +26,7 @@ int main() {
 }
 
 void printBoard(const Chess::Board& board) {
-	for (int y = 0; y < 8; y++) {
+	for (int y = 7; y >= 0; y--) {
 		for (int x = 0; x < 8; x++) {
 			Chess::Piece* piece = board.getPiece(Chess::Position(x, y));
 			if (piece == nullptr) {
@@ -42,7 +47,7 @@ void printValidMoves(const Chess::Board& board, const Chess::Position& position)
 	} else {
 		std::vector<Chess::Position> moves = piece->validMoves(board);
 		for (Chess::Position move : moves) {
-			cout << "x: " << move.x << ", y: " << move.y << endl;
+			cout << "x: " << (move.x + 1) << ", y: " << (move.y + 1) << endl;
 		}
 	}
 }
