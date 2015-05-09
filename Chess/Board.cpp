@@ -17,4 +17,8 @@ namespace Chess {
 			}
 		}
 	}
+
+	Piece* Board::getPiece(const Position& position) const {
+		return pieces[position.x][position.y];
+	}
 }
