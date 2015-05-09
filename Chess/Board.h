@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include "Piece.h"
+#include "King.h"
 
 namespace Chess {
 	/// Chess board.
@@ -22,6 +23,9 @@ namespace Chess {
 
 		private:
 			Piece* pieces[8][8];
+
+			King* whiteKing;
+			King* blackKing;
 	};
 }
 

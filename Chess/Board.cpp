@@ -47,8 +47,10 @@ namespace Chess {
 		pieces[3][7] = new Queen(Position(3, 7), true);
 
 		// Kings
-		pieces[4][0] = new King(Position(4, 0), false);
-		pieces[4][7] = new King(Position(4, 7), true);
+		blackKing = new King(Position(4, 0), false);
+		pieces[4][0] = blackKing;
+		whiteKing = new King(Position(4, 7), true);
+		pieces[4][7] = whiteKing;
 	}
 
 	Board::~Board() {
