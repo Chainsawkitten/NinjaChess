@@ -21,8 +21,7 @@ namespace Chess {
 			{
 				tempPosition.y = this->position.y - 1 + j;
 				if (tempPosition.valid() && 
-					( ( board.getPiece(tempPosition) == nullptr ) || (board.getPiece(tempPosition)->isWhite() != this->isWhite()) ) && 
-					(tempPosition.x != this->position.x && tempPosition.y != this->position.y) )
+					( ( board.getPiece(tempPosition) == nullptr ) || (board.getPiece(tempPosition)->isWhite() != this->isWhite()) ) )
 					validPosition.push_back(tempPosition);
 			}
 		}
