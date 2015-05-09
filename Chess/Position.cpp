@@ -9,4 +9,8 @@ namespace Chess {
 		this->x = x;
 		this->y = y;
 	}
+
+	bool Position::valid() const {
+		return (x >= 0 && x <= 7 && y >= 0 && y <= 7);
+	}
 }
