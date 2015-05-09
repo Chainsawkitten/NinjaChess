@@ -6,6 +6,12 @@
 namespace Chess {
 	/// Pawn.
 	class Pawn : public Piece {
+		private:
+			bool _hasMoved;
+			void set_hasMoved(bool _hasMoved){ this->_hasMoved = _hasMoved;};
+			bool get_hasMoved()const { return _hasMoved; };
+
+
 		public:
 			/// Create pawn.
 			/**
@@ -13,6 +19,13 @@ namespace Chess {
 			* @param white Whether the piece belongs to the white player.
 			*/
 			Pawn(const Position& position, bool white);
+
+			/// Get valid moves.
+			/**
+			* @param board %Board.
+			* @return A list of all the valid moves.
+			*/
+			std::vector<Position> validMoves(const Board& board) const;
 
 			/// Get the notation of the piece.
 			/**
