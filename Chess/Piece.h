@@ -10,11 +10,20 @@ namespace Chess {
 			/// Create new piece.
 			/**
 			 * @param position Position on the board.
+			 * @param white Whether the piece belongs to the white player.
 			 */
-			Piece(const Position& position);
+			Piece(const Position& position, bool white);
+
+			/// Whether the piece belongs to the white player.
+			bool isWhite() const;
 
 		protected:
+			/// Position on the board.
 			Position position;
+
+		private:
+			bool white;
+
 	};
 }
 
