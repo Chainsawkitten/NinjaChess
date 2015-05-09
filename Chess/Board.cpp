@@ -4,6 +4,7 @@
 #include "Knight.h"
 #include "Bishop.h"
 #include "Queen.h"
+#include "King.h"
 
 namespace Chess {
 	Board::Board() {
@@ -35,15 +36,19 @@ namespace Chess {
 		pieces[1][7] = new Knight(Position(1, 7), true);
 		pieces[6][7] = new Knight(Position(6, 7), true);
 
-		// Bishop
+		// Bishops
 		pieces[2][0] = new Bishop(Position(2, 0), false);
 		pieces[5][0] = new Bishop(Position(5, 0), false);
 		pieces[2][7] = new Bishop(Position(2, 7), true);
 		pieces[5][7] = new Bishop(Position(5, 7), true);
 
-		// Queen
+		// Queens
 		pieces[3][0] = new Queen(Position(3, 0), false);
 		pieces[3][7] = new Queen(Position(3, 7), true);
+
+		// Kings
+		pieces[4][0] = new King(Position(4, 0), false);
+		pieces[4][7] = new King(Position(4, 7), true);
 	}
 
 	Board::~Board() {
