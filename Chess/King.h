@@ -2,6 +2,7 @@
 #define KING_H
 
 #include "Piece.h"
+#include "Board.h"
 
 namespace Chess {
 	/// King.
@@ -13,6 +14,13 @@ namespace Chess {
 		* @param white Whether the piece belongs to the white player.
 		*/
 		King(const Position& position, bool white);
+
+		/// Get valid moves.
+		/**
+		* @param board %Board.
+		* @return A list of all the valid moves.
+		*/
+		std::vector<Position> validMoves(const Board& board) const;
 
 		/// Get the notation of the piece.
 		/**

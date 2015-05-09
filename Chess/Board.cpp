@@ -47,7 +47,7 @@ namespace Chess {
 		pieces[3][7] = new Queen(Position(3, 7), true);
 
 		// Kings
-		pieces[4][0] = new King(Position(4, 0), false);
+		pieces[4][4] = new King(Position(4, 4), false);
 		pieces[4][7] = new King(Position(4, 7), true);
 	}
 
