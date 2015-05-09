@@ -12,7 +12,12 @@ int main() {
 	cout << "Check valid moves for position:" << endl;
 	int x, y;
 	cin >> x >> y;
-	printValidMoves(board, Chess::Position(x-1, y-1));
+	Chess::Position position(x-1, y-1);
+	if (position.valid()) {
+		printValidMoves(board, position);
+	} else {
+		cout << "Position out of bounds." << endl;
+	}
 
 	cin.ignore();
 	cin.get();
