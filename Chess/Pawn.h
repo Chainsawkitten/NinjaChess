@@ -8,9 +8,6 @@ namespace Chess {
 	class Pawn : public Piece {
 		private:
 			bool _hasMoved;
-			void set_hasMoved(bool _hasMoved){ this->_hasMoved = _hasMoved;};
-			bool get_hasMoved()const { return _hasMoved; };
-
 
 		public:
 			/// Create pawn.

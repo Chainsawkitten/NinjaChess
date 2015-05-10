@@ -23,8 +23,11 @@ namespace Chess {
 			newPos.y += i*direction;
 
 			Piece* temp = board.getPiece(newPos);
-			if (temp == nullptr && (i!=2)){
+			if (temp == nullptr && (i!=2) && newPos.valid()){
 				moves.push_back(newPos);
+			}
+			else if (temp != nullptr){
+				break;
 			}
 			else if((i==2) && (!_hasMoved)){
 				moves.push_back(newPos);

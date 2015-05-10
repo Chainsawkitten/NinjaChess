@@ -10,7 +10,7 @@ namespace Chess {
 
 		for (int i = -1; i < 2; i += 2){
 			for (int j = -1; j < 2; j += 2){
-				for (int tempX = i, int tempY = j; (((position.x + tempX) && (position.y + tempY)) >= 0) && (((position.x + tempX) && (position.y + tempY)) <= 7); tempY += i, tempX += j){
+				for (int tempX = i, int tempY = j;true; tempY += i, tempX += j){
 					Position newPos = position;
 					newPos.x += tempX;
 					newPos.y += tempY;
@@ -18,7 +18,7 @@ namespace Chess {
 					Piece* temp = board.getPiece(newPos);
 					if (temp == nullptr){
 						moves.push_back(newPos);
-					} else if (isWhite() == temp->isWhite()){
+					} else if (isWhite() == temp->isWhite() || !newPos.valid()){
 						break;
 					}
 					else{
