@@ -1,5 +1,7 @@
 #include "King.h"
 
+#include "Board.h"
+
 namespace Chess {
 	King::King(const Position& position, bool white) : Piece(position, white) {
 
