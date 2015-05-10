@@ -3,7 +3,7 @@
 
 namespace Chess {
 	Pawn::Pawn(const Position& position, bool white) : Piece(position, white) {
-
+		_hasMoved = false;
 	}
 
 	std::vector<Position> Pawn::validMoves(const Board& board) const {
@@ -12,10 +12,10 @@ namespace Chess {
 		int direction = 0;
 
 		if (isWhite()){
-			direction = 1;
+			direction = -1;
 		}
 		else{
-			direction = -1;
+			direction = 1;
 		}
 
 		for (int i = 1; i < 3; i++){
@@ -34,7 +34,7 @@ namespace Chess {
 			}
 		}
 		//Check case where pawn has the ability to eliminate opposing piece
-		for (int j = -1; j < 2;){
+		for (int j = -1; j < 2;j+=2){
 			Position newPos = position;
 			newPos.y += direction;
 			newPos.x += j;

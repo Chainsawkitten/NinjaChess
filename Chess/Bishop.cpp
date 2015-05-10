@@ -10,15 +10,20 @@ namespace Chess {
 
 		for (int i = -1; i < 2; i += 2){
 			for (int j = -1; j < 2; j += 2){
-				for (int tempX = i, int tempY = j;true; tempY += i, tempX += j){
+				int tempX = i;
+				int tempY = j;
+				while (true){
 					Position newPos = position;
 					newPos.x += tempX;
 					newPos.y += tempY;
+					tempX += i;
+					tempY += j;
 
 					Piece* temp = board.getPiece(newPos);
-					if (temp == nullptr){
+					if (temp == nullptr && newPos.valid()){
 						moves.push_back(newPos);
-					} else if (isWhite() == temp->isWhite() || !newPos.valid()){
+					}
+					else if (isWhite() == temp->isWhite() || !newPos.valid()){
 						break;
 					}
 					else{
