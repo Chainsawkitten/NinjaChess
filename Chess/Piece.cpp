@@ -18,7 +18,4 @@ namespace Chess {
 
 		return moves;
 	}
-	bool Piece::lastMoveDouble() const{
-		return lastMoveWasDouble;
-	}
 }

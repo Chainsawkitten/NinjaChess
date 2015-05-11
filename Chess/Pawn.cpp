@@ -43,7 +43,7 @@ namespace Chess {
 			newPos.y += direction;
 			newPos.x += j;
 
-			Piece* tempEnPassant = board.getPiece(enPassantPawn);
+			Pawn* tempEnPassant = dynamic_cast<Pawn *>(board.getPiece(enPassantPawn));
 			Piece* temp = board.getPiece(newPos);
 			if (newPos.valid()){
 				if (temp != nullptr && temp->isWhite() != isWhite()){
@@ -51,7 +51,7 @@ namespace Chess {
 				}
 			}
 			if (enPassantPawn.valid()){
-				if (tempEnPassant->lastMoveDouble() && ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite()))){
+				if (tempEnPassant->lastMoveWasDouble && ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite()))){
 					enPassantPawn.y += direction;
 					moves.push_back(enPassantPawn);
 				}
