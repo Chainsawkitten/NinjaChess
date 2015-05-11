@@ -6,6 +6,7 @@ namespace Chess {
 	Piece::Piece(const Position& position, bool white) {
 		this->position = position;
 		this->white = white;
+		lastMoveWasDouble = false;
 	}
 
 	bool Piece::isWhite() const {
@@ -16,5 +17,8 @@ namespace Chess {
 		std::vector<Position> moves;
 
 		return moves;
+	}
+	bool Piece::lastMoveDouble() const{
+		return lastMoveWasDouble;
 	}
 }

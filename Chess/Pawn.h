@@ -8,6 +8,7 @@ namespace Chess {
 	class Pawn : public Piece {
 		private:
 			bool _hasMoved;
+			bool lastMoveWasDouble;
 
 		public:
 			/// Create pawn.

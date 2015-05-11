@@ -4,6 +4,7 @@
 namespace Chess {
 	Pawn::Pawn(const Position& position, bool white) : Piece(position, white) {
 		_hasMoved = false;
+		lastMoveWasDouble = false;
 	}
 
 	std::vector<Position> Pawn::validMoves(const Board& board) const {
@@ -12,10 +13,10 @@ namespace Chess {
 		int direction = 0;
 
 		if (isWhite()){
-			direction = -1;
+			direction = 1;
 		}
 		else{
-			direction = 1;
+			direction = -1;
 		}
 
 		for (int i = 1; i < 3; i++){
@@ -33,19 +34,29 @@ namespace Chess {
 				moves.push_back(newPos);
 			}
 		}
-		//Check case where pawn has the ability to eliminate opposing piece
+		//Check case where pawn has the ability to eliminate opposing piece (incl. en passant)
 		for (int j = -1; j < 2;j+=2){
+			Position enPassantPawn=position;
 			Position newPos = position;
+
+			enPassantPawn.x += j;
 			newPos.y += direction;
 			newPos.x += j;
 
+			Piece* tempEnPassant = board.getPiece(enPassantPawn);
 			Piece* temp = board.getPiece(newPos);
-			if (temp != nullptr && temp->isWhite() != isWhite()){
-				moves.push_back(newPos);
+			if (newPos.valid()){
+				if (temp != nullptr && temp->isWhite() != isWhite()){
+					moves.push_back(newPos);
+				}
+			}
+			if (enPassantPawn.valid()){
+				if (tempEnPassant->lastMoveDouble() && ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite()))){
+					enPassantPawn.y += direction;
+					moves.push_back(enPassantPawn);
+				}
 			}
 		}
-
-
 
 		return moves;
 	}

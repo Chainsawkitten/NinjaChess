@@ -23,6 +23,12 @@ namespace Chess {
 			 */
 			bool isWhite() const;
 
+			/// Did this piece (only applies to pawn) move two spaces last move?
+			/**
+			* @return Whether pawn's last move was two spaces or not
+			*/
+			bool lastMoveDouble() const;
+
 			/// Get valid moves.
 			/**
 			 * @param board %Board.
@@ -42,7 +48,10 @@ namespace Chess {
 			Position position;
 
 		private:
+			///Boolean for determining if 'En Passant' is valid move
+			bool lastMoveWasDouble;
 			bool white;
+
 
 	};
 }
