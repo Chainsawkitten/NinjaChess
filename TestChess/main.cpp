@@ -9,15 +9,42 @@ int main() {
 
 	printBoard(board);
 
-	cout << "Check valid moves for position:" << endl;
-	int x, y;
-	cin >> x >> y;
-	Chess::Position position(x-1, y-1);
-	if (position.valid()) {
-		printValidMoves(board, position);
-	} else {
-		cout << "Position out of bounds." << endl;
-	}
+	int choice;
+	do {
+		cout << "1. Move" << endl
+			 << "2. Check valid moves" << endl;
+		cin >> choice;
+
+		switch (choice) {
+		case 1:
+			cout << "Move piece: ";
+			int oldX, oldY;
+			cin >> oldX >> oldY;
+			cout << "Where: ";
+			int newX, newY;
+			cin >> newX >> newY;
+
+			if (!board.move(Chess::Position(oldX - 1, oldY - 1), Chess::Position(newX - 1, newY - 1)))
+				cout << "Invalid move." << endl;
+			
+			cout << endl;
+			printBoard(board);
+
+			break;
+		case 2:
+			cout << "Check valid moves for position: ";
+			int x, y;
+			cin >> x >> y;
+			Chess::Position position(x - 1, y - 1);
+			if (position.valid()) {
+				printValidMoves(board, position);
+			} else {
+				cout << "Position out of bounds." << endl;
+			}
+			cout << endl;
+			break;
+		}
+	} while (choice >= 1 && choice <= 2);
 
 	cin.ignore();
 	cin.get();
