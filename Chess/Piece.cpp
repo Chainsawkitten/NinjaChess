@@ -13,12 +13,17 @@ namespace Chess {
 		return white;
 	}
 
+	void Piece::move(const Position& newPosition) {
+		position = newPosition;
+	}
+
 	std::vector<Position> Piece::validMoves(const Board& board) const {
 		std::vector<Position> moves;
 
 		return moves;
 	}
-	bool Piece::lastMoveDouble() const{
+
+	bool Piece::lastMoveDouble() const {
 		return lastMoveWasDouble;
 	}
 }

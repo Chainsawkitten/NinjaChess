@@ -23,6 +23,12 @@ namespace Chess {
 			 */
 			bool isWhite() const;
 
+			/// Move the piece to another position.
+			/**
+			 * @param newPosition %Position to move the piece to.
+			 */
+			void move(const Position& newPosition);
+
 			/// Did this piece (only applies to pawn) move two spaces last move?
 			/**
 			* @return Whether pawn's last move was two spaces or not

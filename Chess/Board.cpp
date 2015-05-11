@@ -65,4 +65,27 @@ namespace Chess {
 	Piece* Board::getPiece(const Position& position) const {
 		return pieces[position.x][position.y];
 	}
+
+	bool Board::move(const Position& oldPosition, const Position& newPosition) {
+		Piece* piece = getPiece(oldPosition);
+
+		if (piece != nullptr) {
+			// TODO: Check if the piece is of the right color.
+			// TODO: Check if the move is valid.
+
+			pieces[oldPosition.x][oldPosition.y] = nullptr;
+
+			// TODO: Capture
+
+			pieces[newPosition.x][newPosition.y] = piece;
+			piece->move(newPosition);
+			
+			// TODO: En passant, castling, promotion.
+			
+			turn++;
+			return true;
+		}
+
+		return false;
+	}
 }

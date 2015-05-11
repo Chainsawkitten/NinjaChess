@@ -7,6 +7,8 @@ using namespace std;
 int main() {
 	Chess::Board board;
 
+	board.move(Chess::Position(0, 1), Chess::Position(0, 3));
+
 	printBoard(board);
 
 	cout << "Check valid moves for position:" << endl;
