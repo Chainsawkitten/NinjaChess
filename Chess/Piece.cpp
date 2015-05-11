@@ -6,7 +6,6 @@ namespace Chess {
 	Piece::Piece(const Position& position, bool white) {
 		this->position = position;
 		this->white = white;
-		lastMoveWasDouble = false;
 	}
 
 	bool Piece::isWhite() const {

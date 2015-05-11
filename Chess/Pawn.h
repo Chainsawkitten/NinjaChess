@@ -6,10 +6,6 @@
 namespace Chess {
 	/// Pawn.
 	class Pawn : public Piece {
-		private:
-			bool _hasMoved;
-			bool lastMoveWasDouble;
-
 		public:
 			/// Create pawn.
 			/**
@@ -31,6 +27,10 @@ namespace Chess {
 			* @see http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 			*/
 			char notation() const;
+	private:
+		bool _hasMoved;
+		bool lastMoveWasDouble;
+
 	};
 }
 
