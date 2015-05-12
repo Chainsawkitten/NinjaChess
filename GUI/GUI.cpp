@@ -1,9 +1,10 @@
 #include "GUI.h"
 
 using namespace sf;
+using namespace Chess;
 
 namespace GUI {
-	GUI::GUI(int width, int height, Chess::Board& board) : board(board) {
+	GUI::GUI(int width, int height, Board& board) : board(board) {
 		this->width = width;
 		this->height = height;
 
@@ -37,9 +38,7 @@ namespace GUI {
 		window->clear();
 
 		drawBoard();
-
-		text.setString("ABCDEFabcdef");
-		window->draw(text);
+		drawPieces();
 
 		window->display();
 	}
@@ -59,6 +58,19 @@ namespace GUI {
 					square.setFillColor(darkSquare);
 
 				window->draw(square);
+			}
+		}
+	}
+
+	void GUI::drawPieces() {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Piece* piece = board.getPiece(Position(x, y));
+				if (piece != nullptr) {
+					text.setPosition(Vector2f(x * width / 8.f, y * width / 8.f));
+					text.setString("A");
+					window->draw(text);
+				}
 			}
 		}
 	}

@@ -32,6 +32,7 @@ namespace GUI {
 
 		private:
 			void drawBoard();
+			void drawPieces();
 
 			int width, height;
 			Chess::Board& board;
