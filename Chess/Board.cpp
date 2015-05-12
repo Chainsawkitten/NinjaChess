@@ -88,6 +88,10 @@ namespace Chess {
 					// TODO: Castling, promotion, pawn double move.
 
 					turn++;
+					if (state == GameState::BLACKPLAYS)
+						state = GameState::WHITEPLAYS;
+					else
+						state = GameState::BLACKPLAYS;
 					return true;
 				}
 			}
