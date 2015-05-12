@@ -17,6 +17,10 @@ namespace GUI {
 		text.setColor(Color::Black);
 	}
 
+	GUI::~GUI() {
+		delete window;
+	}
+
 	bool GUI::isOpen() const {
 		return window->isOpen();
 	}

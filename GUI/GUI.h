@@ -15,6 +15,9 @@ namespace GUI {
 			 */
 			GUI(int width, int height, Chess::Board& board);
 
+			/// Free allocated resources.
+			~GUI();
+
 			/// Get whether the %GUI window is still open.
 			/**
 			 * @return Whether the %GUI window is still open.
