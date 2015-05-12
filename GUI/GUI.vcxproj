@@ -105,10 +105,11 @@ copy /y "$(SolutionDir)SFML-2.2\bin\sfml-window-2.dll" "$(OutDir)sfml-window-2.d
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h" />
+    <ClInclude Include="GUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
