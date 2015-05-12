@@ -3,7 +3,7 @@
 using namespace sf;
 
 namespace GUI {
-	GUI::GUI(int width, int height) {
+	GUI::GUI(int width, int height, Chess::Board& board) : board(board) {
 		this->width = width;
 		this->height = height;
 

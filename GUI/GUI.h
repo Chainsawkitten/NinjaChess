@@ -2,6 +2,7 @@
 #define GUI_H
 
 #include <SFML/Graphics.hpp>
+#include <Board.h>
 
 namespace GUI {
 	class GUI {
@@ -10,8 +11,9 @@ namespace GUI {
 			/**
 			 * @param width Width of the %GUI.
 			 * @param height Height of the %GUI.
+			 * @param board Chess board.
 			 */
-			GUI(int width, int height);
+			GUI(int width, int height, Chess::Board& board);
 
 			/// Get whether the %GUI window is still open.
 			/**
@@ -29,6 +31,7 @@ namespace GUI {
 			void drawBoard();
 
 			int width, height;
+			Chess::Board& board;
 
 			sf::RenderWindow* window;
 			sf::Font font;
