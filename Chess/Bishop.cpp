@@ -5,14 +5,14 @@ namespace Chess {
 	Bishop::Bishop(const Position& position, bool white) : Piece(position, white) {
 	}
 
-	std::vector<Position> Bishop::validMoves(const Board& board) const {
+	std::vector<Position> Bishop::legalMoves(const Board& board) const {
 		std::vector<Position> moves;
 
-		for (int i = -1; i < 2; i += 2){
-			for (int j = -1; j < 2; j += 2){
+		for (int i = -1; i < 2; i += 2) {
+			for (int j = -1; j < 2; j += 2) {
 				int tempX = i;
 				int tempY = j;
-				while (true){
+				while (true) {
 					Position newPos = position;
 					newPos.x += tempX;
 					newPos.y += tempY;
@@ -20,13 +20,11 @@ namespace Chess {
 					tempY += j;
 
 					Piece* temp = board.getPiece(newPos);
-					if (temp == nullptr && newPos.valid()){
+					if (temp == nullptr && newPos.valid()) {
 						moves.push_back(newPos);
-					}
-					else if (isWhite() == temp->isWhite() || !newPos.valid()){
+					} else if (isWhite() == temp->isWhite() || !newPos.valid()) {
 						break;
-					}
-					else{
+					} else{
 						moves.push_back(newPos);
 						break;
 					}

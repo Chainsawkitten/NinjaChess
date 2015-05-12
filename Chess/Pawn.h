@@ -17,9 +17,9 @@ namespace Chess {
 			/// Get valid moves.
 			/**
 			* @param board %Board.
-			* @return A list of all the valid moves.
+			* @return A list of all the legal moves.
 			*/
-			std::vector<Position> validMoves(const Board& board) const;
+			std::vector<Position> legalMoves(const Board& board) const;
 
 			/// Get the notation of the piece.
 			/**

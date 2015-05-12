@@ -37,12 +37,12 @@ namespace Chess {
 			 */
 			bool isLegal(const Board& board, const Position& newPosition) const;
 
-			/// Get valid moves.
+			/// Get legal moves.
 			/**
 			 * @param board %Board.
-			 * @return A list of all the valid moves.
+			 * @return A list of all the legal moves.
 			 */
-			virtual std::vector<Position> validMoves(const Board& board) const;
+			virtual std::vector<Position> legalMoves(const Board& board) const;
 
 			/// Get the notation of the piece.
 			/**

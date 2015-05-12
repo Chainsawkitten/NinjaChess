@@ -12,7 +12,7 @@ int main() {
 	int choice;
 	do {
 		cout << "1. Move" << endl
-			 << "2. Check valid moves" << endl;
+			 << "2. Check legal moves" << endl;
 		cin >> choice;
 
 		switch (choice) {
@@ -32,12 +32,12 @@ int main() {
 
 			break;
 		case 2:
-			cout << "Check valid moves for position: ";
+			cout << "Check legal moves for position: ";
 			int x, y;
 			cin >> x >> y;
 			Chess::Position position(x - 1, y - 1);
 			if (position.valid()) {
-				printValidMoves(board, position);
+				printLegalMoves(board, position);
 			} else {
 				cout << "Position out of bounds." << endl;
 			}
@@ -66,13 +66,13 @@ void printBoard(const Chess::Board& board) {
 	}
 }
 
-void printValidMoves(const Chess::Board& board, const Chess::Position& position) {
+void printLegalMoves(const Chess::Board& board, const Chess::Position& position) {
 	Chess::Piece* piece = board.getPiece(position);
 
 	if (piece == nullptr) {
 		cout << "No piece at that position." << endl;
 	} else {
-		std::vector<Chess::Position> moves = piece->validMoves(board);
+		std::vector<Chess::Position> moves = piece->legalMoves(board);
 		for (Chess::Position move : moves) {
 			cout << "x: " << (move.x + 1) << ", y: " << (move.y + 1) << endl;
 		}

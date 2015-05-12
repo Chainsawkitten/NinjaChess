@@ -12,11 +12,11 @@ int main();
  */
 void printBoard(const Chess::Board& board);
 
-/// Print valid moves.
+/// Print legal moves.
 /**
  * @parma board %Board.
  * @param position %Piece position.
  */
-void printValidMoves(const Chess::Board& board, const Chess::Position& position);
+void printLegalMoves(const Chess::Board& board, const Chess::Position& position);
 
 #endif

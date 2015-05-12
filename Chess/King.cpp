@@ -11,16 +11,13 @@ namespace Chess {
 		return isWhite() ? 'K' : 'k';
 	}
 
-	std::vector<Position> King::validMoves(const Board& board) const
-	{
+	std::vector<Position> King::legalMoves(const Board& board) const {
 		std::vector<Position> validPosition;
 		Position tempPosition;
 
-		for (int i = 0; i < 3; i++)
-		{
+		for (int i = 0; i < 3; i++) {
 			tempPosition.x = this->position.x - 1 + i;
-			for (int j = 0; j < 3; j++)
-			{
+			for (int j = 0; j < 3; j++) {
 				tempPosition.y = this->position.y - 1 + j;
 				if (tempPosition.valid() && 
 					( ( board.getPiece(tempPosition) == nullptr ) || (board.getPiece(tempPosition)->isWhite() != this->isWhite()) ) )
