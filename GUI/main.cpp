@@ -5,6 +5,7 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Ninja Chess");
+	window.setVerticalSyncEnabled(true);
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
