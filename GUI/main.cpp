@@ -9,6 +9,14 @@ int main() {
 	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Ninja Chess");
 	window.setVerticalSyncEnabled(true);
 
+	Font font;
+	font.loadFromFile("Resources/stchess.ttf");
+
+	Text text;
+	text.setFont(font);
+	text.setCharacterSize(WINDOW_HEIGHT / 8.f);
+	text.setColor(Color::Black);
+
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -19,6 +27,9 @@ int main() {
 		window.clear();
 		
 		drawBoard(window);
+
+		text.setString("ABCDEFabcdef");
+		window.draw(text);
 
 		window.display();
 	}
