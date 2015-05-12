@@ -13,4 +13,12 @@ namespace Chess {
 	bool Position::valid() const {
 		return (x >= 0 && x <= 7 && y >= 0 && y <= 7);
 	}
+
+	bool operator==(const Position& lhs, const Position& rhs) {
+		return (lhs.x == rhs.x) && (lhs.y == rhs.y);
+	}
+
+	bool operator!=(const Position& lhs, const Position& rhs) {
+		return !(lhs == rhs);
+	}
 }

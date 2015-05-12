@@ -26,6 +26,12 @@ namespace Chess {
 			 */
 			bool valid() const;
 	};
+
+	/// Overloaded == for Position.
+	bool operator==(const Position& lhs, const Position& rhs);
+
+	/// Overloaded != for Position.
+	bool operator!=(const Position& lhs, const Position& rhs);
 }
 
 #endif POSITION_H
