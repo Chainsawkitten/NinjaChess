@@ -76,12 +76,16 @@ namespace Chess {
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
-					// TODO: Capture
+					// Delete captured piece.
+					if (pieces[newPosition.x][newPosition.y] != nullptr)
+						delete pieces[newPosition.x][newPosition.y];
+
+					// TODO: En passant.
 
 					pieces[newPosition.x][newPosition.y] = piece;
 					piece->move(newPosition);
 
-					// TODO: En passant, castling, promotion, pawn double move.
+					// TODO: Castling, promotion, pawn double move.
 
 					turn++;
 					return true;
