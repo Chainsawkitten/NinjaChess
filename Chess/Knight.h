@@ -14,6 +14,13 @@ namespace Chess {
 		*/
 		Knight(const Position& position, bool white);
 
+		/// Get valid moves.
+		/**
+		* @param board %Board.
+		* @return A list of all the legal moves.
+		*/
+		std::vector<Position> legalMoves(const Board& board) const;
+
 		/// Get the notation of the piece.
 		/**
 		* @return FEN-notation of the piece.
