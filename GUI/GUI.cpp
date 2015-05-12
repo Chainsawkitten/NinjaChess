@@ -80,7 +80,7 @@ namespace GUI {
 			for (int y = 0; y < 8; y++) {
 				Piece* piece = board.getPiece(Position(x, 7-y));
 				if (piece != nullptr) {
-					text.setPosition(Vector2f(x * width / 8.f, y * width / 8.f));
+					text.setPosition(Vector2f(x * width / 8.f, (y - 0.2f) * width / 8.f));
 					text.setString(notationMap[piece->notation()]);
 					window->draw(text);
 				}
