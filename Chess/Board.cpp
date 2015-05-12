@@ -72,7 +72,6 @@ namespace Chess {
 		if (piece != nullptr) {
 			// Check if the piece is of the right color.
 			if (piece->isWhite() == (turn % 2 == 0)) {
-				state = GameState::WHITEPLAYS;
 				// Check if the move is legal.
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
@@ -92,8 +91,6 @@ namespace Chess {
 					return true;
 				}
 			}
-			else
-				state = GameState::BLACKPLAYS;
 		}
 
 		return false;
