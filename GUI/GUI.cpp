@@ -16,6 +16,19 @@ namespace GUI {
 		text.setFont(font);
 		text.setCharacterSize(height / 8);
 		text.setColor(Color::Black);
+
+		notationMap['P'] = "A";
+		notationMap['p'] = "a";
+		notationMap['R'] = "D";
+		notationMap['r'] = "d";
+		notationMap['N'] = "B";
+		notationMap['n'] = "b";
+		notationMap['B'] = "C";
+		notationMap['b'] = "c";
+		notationMap['Q'] = "E";
+		notationMap['q'] = "e";
+		notationMap['K'] = "F";
+		notationMap['k'] = "f";
 	}
 
 	GUI::~GUI() {
@@ -65,10 +78,10 @@ namespace GUI {
 	void GUI::drawPieces() {
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				Piece* piece = board.getPiece(Position(x, y));
+				Piece* piece = board.getPiece(Position(x, 7-y));
 				if (piece != nullptr) {
 					text.setPosition(Vector2f(x * width / 8.f, y * width / 8.f));
-					text.setString("A");
+					text.setString(notationMap[piece->notation()]);
 					window->draw(text);
 				}
 			}

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Board.h>
+#include <map>
 
 namespace GUI {
 	class GUI {
@@ -36,6 +37,8 @@ namespace GUI {
 
 			int width, height;
 			Chess::Board& board;
+
+			std::map<char, const char*> notationMap;
 
 			sf::RenderWindow* window;
 			sf::Font font;
