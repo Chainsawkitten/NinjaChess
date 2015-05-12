@@ -53,10 +53,12 @@ namespace GUI {
 			tempPos.y = 7 - tempPos.y;
 			if (tempPos.valid()) {
 				Piece* tempPiece = board.getPiece(tempPos);
-				if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
-					return;
-				else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
-					return;
+				if (tempPiece != nullptr){
+					if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
+						return;
+					else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
+						return;
+				}
 				if (selected) {
 					Piece* selectedPiece = board.getPiece(selection);
 					if (selectedPiece->isLegal(board, tempPos)) {
