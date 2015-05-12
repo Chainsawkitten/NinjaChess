@@ -3,16 +3,18 @@
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 400
 
+using namespace sf;
+
 int main() {
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Ninja Chess");
+	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Ninja Chess");
 	window.setVerticalSyncEnabled(true);
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	CircleShape shape(100.f);
+	shape.setFillColor(Color::Green);
 
 	while (window.isOpen()) {
-		sf::Event event;
+		Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
+			if (event.type == Event::Closed)
 				window.close();
 		}
 
