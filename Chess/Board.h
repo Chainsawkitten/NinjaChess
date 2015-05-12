@@ -5,6 +5,7 @@
 #include "King.h"
 
 namespace Chess {
+	enum class GameState{WHITEPLAYS, BLACKPLAYS, WHITEWIN, BLACKWIN, DRAW};
 	/// Chess board.
 	class Board {
 		public:
@@ -34,6 +35,7 @@ namespace Chess {
 
 			King* whiteKing;
 			King* blackKing;
+			GameState state = GameState::WHITEPLAYS;
 
 			int turn = 0;
 	};
