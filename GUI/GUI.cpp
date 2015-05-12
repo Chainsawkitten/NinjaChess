@@ -50,8 +50,18 @@ namespace GUI {
 		if (pressed && !mousePressed) {
 			Vector2i mousePos = Mouse::getPosition(*window);
 			Position tempPos(mousePos.x * 8 / width, mousePos.y * 8 / height);
+			tempPos.y = 7 - tempPos.y;
 			if (tempPos.valid()) {
-				if (board.getPiece(tempPos) != nullptr) {
+				if (selected) {
+					Piece* selectedPiece = board.getPiece(selection);
+					if (selectedPiece->isLegal(board, tempPos)) {
+						board.move(selection, tempPos);
+						selected = false;
+					} else if (board.getPiece(tempPos) != nullptr) {
+						selection = tempPos;
+						selected = true;
+					}
+				} else if (board.getPiece(tempPos) != nullptr) {
 					selection = tempPos;
 					selected = true;
 				}
@@ -79,7 +89,7 @@ namespace GUI {
 			for (int y = 0; y < 8; y++) {
 				square.setPosition(x * width / 8.f, y * height / 8.f);
 
-				if (selected && selection == Position(x, y))
+				if (selected && selection == Position(x, 7-y))
 					square.setFillColor(Color::Yellow);
 				else if ((x + y) % 2 == 0)
 					square.setFillColor(brightSquare);
