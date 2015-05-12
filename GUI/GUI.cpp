@@ -49,9 +49,13 @@ namespace GUI {
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed) {
 			Vector2i mousePos = Mouse::getPosition(*window);
-			selection.x = mousePos.x * 8 / width;
-			selection.y = mousePos.y * 8 / height;
-			selected = selection.valid();
+			Position tempPos(mousePos.x * 8 / width, mousePos.y * 8 / height);
+			if (tempPos.valid()) {
+				if (board.getPiece(tempPos) != nullptr) {
+					selection = tempPos;
+					selected = true;
+				}
+			}
 		}
 
 		mousePressed = pressed;
