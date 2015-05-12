@@ -45,6 +45,16 @@ namespace GUI {
 			if (event.type == Event::Closed)
 				window->close();
 		}
+
+		bool pressed = Mouse::isButtonPressed(Mouse::Left);
+		if (pressed && !mousePressed) {
+			Vector2i mousePos = Mouse::getPosition(*window);
+			selection.x = mousePos.x * 8 / width;
+			selection.y = mousePos.y * 8 / height;
+			selected = selection.valid();
+		}
+
+		mousePressed = pressed;
 	}
 
 	void GUI::render() {
@@ -65,7 +75,9 @@ namespace GUI {
 			for (int y = 0; y < 8; y++) {
 				square.setPosition(x * width / 8.f, y * height / 8.f);
 
-				if ((x + y) % 2 == 0)
+				if (selected && selection == Position(x, y))
+					square.setFillColor(Color::Yellow);
+				else if ((x + y) % 2 == 0)
 					square.setFillColor(brightSquare);
 				else
 					square.setFillColor(darkSquare);

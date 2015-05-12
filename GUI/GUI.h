@@ -43,6 +43,10 @@ namespace GUI {
 			sf::RenderWindow* window;
 			sf::Font font;
 			sf::Text text;
+
+			Chess::Position selection;
+			bool selected;
+			bool mousePressed;
 	};
 }
 
