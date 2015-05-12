@@ -29,6 +29,14 @@ namespace Chess {
 			 */
 			void move(const Position& newPosition);
 
+			/// Get whether a move is legal.
+			/**
+			 * @param board %Board.
+			 * @param newPosition %Position to move to.
+			 * @return Whether it's a legal move
+			 */
+			bool isLegal(const Board& board, const Position& newPosition) const;
+
 			/// Get valid moves.
 			/**
 			 * @param board %Board.

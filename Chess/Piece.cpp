@@ -16,6 +16,16 @@ namespace Chess {
 		position = newPosition;
 	}
 
+	bool Piece::isLegal(const Board& board, const Position& newPosition) const {
+		std::vector<Position> moves = validMoves(board);
+		for (const Position move : moves) {
+			if (newPosition == move)
+				return true;
+		}
+
+		return false;
+	}
+
 	std::vector<Position> Piece::validMoves(const Board& board) const {
 		std::vector<Position> moves;
 

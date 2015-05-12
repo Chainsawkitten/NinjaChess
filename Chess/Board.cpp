@@ -72,19 +72,20 @@ namespace Chess {
 		if (piece != nullptr) {
 			// Check if the piece is of the right color.
 			if (piece->isWhite() == (turn % 2 == 0)) {
-				// TODO: Check if the move is valid.
+				// Check if the move is legal.
+				if (piece->isLegal(*this, newPosition)) {
+					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
-				pieces[oldPosition.x][oldPosition.y] = nullptr;
+					// TODO: Capture
 
-				// TODO: Capture
+					pieces[newPosition.x][newPosition.y] = piece;
+					piece->move(newPosition);
 
-				pieces[newPosition.x][newPosition.y] = piece;
-				piece->move(newPosition);
+					// TODO: En passant, castling, promotion, pawn double move.
 
-				// TODO: En passant, castling, promotion, pawn double move.
-
-				turn++;
-				return true;
+					turn++;
+					return true;
+				}
 			}
 		}
 
