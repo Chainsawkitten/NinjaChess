@@ -22,7 +22,8 @@ namespace Chess {
 					Piece* temp = board.getPiece(newPos);
 					if (temp == nullptr && newPos.valid()) {
 						moves.push_back(newPos);
-					} else if (isWhite() == temp->isWhite() || !newPos.valid()) {
+					}
+					else if (!newPos.valid() || isWhite() == temp->isWhite()) {
 						break;
 					} else{
 						moves.push_back(newPos);
