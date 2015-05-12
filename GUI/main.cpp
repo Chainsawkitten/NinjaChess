@@ -27,15 +27,18 @@ int main() {
 }
 
 void drawBoard(RenderWindow& window) {
+	Color brightSquare(224, 217, 190);
+	Color darkSquare(152, 145, 135);
+
 	RectangleShape square(Vector2f(WINDOW_WIDTH / 8.f, WINDOW_HEIGHT / 8.f));
 	for (int x = 0; x < 8; x++) {
 		for (int y = 0; y < 8; y++) {
 			square.setPosition(x * WINDOW_WIDTH / 8.f, y * WINDOW_HEIGHT / 8.f);
 
 			if ((x + y) % 2 == 0)
-				square.setFillColor(Color::Green);
+				square.setFillColor(brightSquare);
 			else
-				square.setFillColor(Color::Red);
+				square.setFillColor(darkSquare);
 
 			window.draw(square);
 		}
