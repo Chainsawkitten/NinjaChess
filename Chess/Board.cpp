@@ -62,6 +62,10 @@ namespace Chess {
 		}
 	}
 
+	GameState Board::getState(){
+		return state;
+	}
+
 	Piece* Board::getPiece(const Position& position) const {
 		return pieces[position.x][position.y];
 	}

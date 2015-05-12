@@ -30,6 +30,11 @@ namespace Chess {
 			 */
 			bool move(const Position& oldPosition, const Position& newPosition);
 
+			/// Returns the boards current state
+			/**
+			* @return Returns the boards current state
+			*/
+			GameState getState();
 		private:
 			Piece* pieces[8][8];
 
