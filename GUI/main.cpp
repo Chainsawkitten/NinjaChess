@@ -1,7 +1,10 @@
 #include <SFML/Graphics.hpp>
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 400
+
 int main() {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Ninja Chess");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
