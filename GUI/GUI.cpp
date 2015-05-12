@@ -52,18 +52,21 @@ namespace GUI {
 			Position tempPos(mousePos.x * 8 / width, mousePos.y * 8 / height);
 			tempPos.y = 7 - tempPos.y;
 			if (tempPos.valid()) {
+				Piece* tempPiece = board.getPiece(tempPos);
 				if (selected) {
 					Piece* selectedPiece = board.getPiece(selection);
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
 						selected = false;
-					} else if (board.getPiece(tempPos) != nullptr) {
+					} else if (tempPiece != nullptr) {
 						selection = tempPos;
 						selected = true;
+						highlights = tempPiece->legalMoves(board);
 					}
-				} else if (board.getPiece(tempPos) != nullptr) {
+				} else if (tempPiece != nullptr) {
 					selection = tempPos;
 					selected = true;
+					highlights = tempPiece->legalMoves(board);
 				}
 			}
 		}
@@ -89,8 +92,10 @@ namespace GUI {
 			for (int y = 0; y < 8; y++) {
 				square.setPosition(x * width / 8.f, y * height / 8.f);
 
-				if (selected && selection == Position(x, 7-y))
+				if (selected && selection == Position(x, 7 - y))
 					square.setFillColor(Color::Yellow);
+				else if (selected && highlighted(Position(x, 7 - y)))
+					square.setFillColor(Color::Green);
 				else if ((x + y) % 2 == 0)
 					square.setFillColor(brightSquare);
 				else
@@ -112,5 +117,14 @@ namespace GUI {
 				}
 			}
 		}
+	}
+
+	bool GUI::highlighted(const Position& position) {
+		for (Position move : highlights) {
+			if (move == position)
+				return true;
+		}
+
+		return false;
 	}
 }

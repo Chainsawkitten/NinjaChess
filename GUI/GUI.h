@@ -34,6 +34,7 @@ namespace GUI {
 		private:
 			void drawBoard();
 			void drawPieces();
+			bool highlighted(const Chess::Position& position);
 
 			int width, height;
 			Chess::Board& board;
@@ -47,6 +48,8 @@ namespace GUI {
 			Chess::Position selection;
 			bool selected;
 			bool mousePressed;
+
+			std::vector<Chess::Position> highlights;
 	};
 }
 
