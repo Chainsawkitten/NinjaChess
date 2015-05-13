@@ -71,7 +71,7 @@ namespace GUI {
 					Piece* selectedPiece = board.getPiece(selection);
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
-						lastMovedPiece = tempPiece;
+						lastMovedPiece = selectedPiece;
 						selected = false;
 					}
 					else if (tempPiece != nullptr) {
@@ -110,9 +110,7 @@ namespace GUI {
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
-			Position tempPosition;
-			tempPosition.x = lastMovedPiece->getPosition().x;
-			tempPosition.y = lastMovedPiece->getPosition().y;
+			Position tempPosition = lastMovedPiece->getPosition();
 			bool tempIsWhite = lastMovedPiece->isWhite();
 			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
 				printf("QUEEN");
