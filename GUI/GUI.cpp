@@ -101,19 +101,19 @@ namespace GUI {
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
-			if ((mousePos.x < width / 2.f) && (mousePos.y < height)){
+			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
 				text.setCharacterSize(height / 8);
 				showPromoteWindow = false;
 			}
-			else if ((mousePos.x > width / 2.f) && (mousePos.y < height)){
+			else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
 				text.setCharacterSize(height / 8);
 				showPromoteWindow = false;
 			}
-			else if ((mousePos.x < width / 2.f) && (mousePos.y > height)){
+			else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
 				showPromoteWindow = false;
 			}
-			else if ((mousePos.x < width / 2.f) && (mousePos.y > height)){
+			else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
 				showPromoteWindow = false;
 			}
