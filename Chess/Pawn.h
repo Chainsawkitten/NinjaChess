@@ -14,6 +14,12 @@ namespace Chess {
 			*/
 			Pawn(const Position& position, bool white);
 
+			/// Move the pawn to another position (override Piece::move(..)).
+			/**
+			* @param newPosition %Position to move the piece to.
+			*/
+			void move(const Position& newPosition);
+
 			/// Get valid moves.
 			/**
 			* @param board %Board.

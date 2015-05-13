@@ -16,6 +16,12 @@ namespace Chess {
 			*/
 			King(const Position& position, bool white);
 
+			/// Move the piece to another position.
+			/**
+			* @param newPosition %Position to move the piece to.
+			*/
+			void move(const Position& newPosition);
+
 			/// Get legal moves.
 			/**
 			* @param board %Board.
@@ -29,6 +35,8 @@ namespace Chess {
 			* @see http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 			*/
 			char notation() const;
+		private:
+			bool _hasMoved;
 	};
 }
 
