@@ -6,6 +6,7 @@
 
 namespace Chess {
 	enum class GameState{WHITEPLAYS, BLACKPLAYS, WHITEWIN, BLACKWIN, DRAW};
+	enum class PromoteTypes{ROOK, KNIGHT, BISHOP, QUEEN};
 	/// Chess board.
 	class Board {
 		public:
