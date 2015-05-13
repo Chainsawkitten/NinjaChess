@@ -44,7 +44,7 @@ namespace GUI {
 			std::map<char, const char*> notationMap;
 
 			sf::RenderWindow* window;
-			bool showPromoteWindow = true;
+			bool showPromoteWindow = false;
 			sf::Font font;
 			sf::Text text;
 
