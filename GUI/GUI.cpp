@@ -40,6 +40,10 @@ namespace GUI {
 	}
 
 	void GUI::update() {
+		updateGame();
+	}
+
+	void GUI::updateGame(){
 		Event event;
 		while (window->pollEvent(event)) {
 			if (event.type == Event::Closed)
@@ -58,7 +62,8 @@ namespace GUI {
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
 						selected = false;
-					} else if (tempPiece != nullptr) {
+					}
+					else if (tempPiece != nullptr) {
 						if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 							return;
 						else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
@@ -67,7 +72,8 @@ namespace GUI {
 						selected = true;
 						highlights = tempPiece->legalMoves(board);
 					}
-				} else if (tempPiece != nullptr) {
+				}
+				else if (tempPiece != nullptr) {
 					if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 						return;
 					else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))

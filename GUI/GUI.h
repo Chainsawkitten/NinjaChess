@@ -27,7 +27,6 @@ namespace GUI {
 
 			/// Update.
 			void update();
-
 			/// Render the %GUI.
 			void render();
 
@@ -35,6 +34,7 @@ namespace GUI {
 			void drawBoard();
 			void drawPieces();
 			void drawPromote();
+			void updateGame();
 			bool highlighted(const Chess::Position& position);
 
 			int width, height;
@@ -43,7 +43,7 @@ namespace GUI {
 			std::map<char, const char*> notationMap;
 
 			sf::RenderWindow* window;
-			bool showPromoteWindow = true;
+			bool showPromoteWindow = false;
 			sf::Font font;
 			sf::Text text;
 
