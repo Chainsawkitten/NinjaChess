@@ -70,6 +70,12 @@ namespace Chess {
 		return pieces[position.x][position.y];
 	}
 
+	bool Board::signalPromote(){
+		bool temp = needsToPromote;
+		needsToPromote = false;
+		return temp;
+	}
+
 	bool Board::move(const Position& oldPosition, const Position& newPosition) {
 		Piece* piece = getPiece(oldPosition);
 
@@ -88,7 +94,11 @@ namespace Chess {
 
 					pieces[newPosition.x][newPosition.y] = piece;
 					piece->move(newPosition);
-
+					if(newPosition.y == 7 || newPosition.y == 0){
+						if (piece->notation() == 'p' || piece->notation() == 'P'){
+							needsToPromote = true;
+						}
+					}
 					// TODO: Castling, promotion, pawn double move.
 
 					turn++;

@@ -89,6 +89,8 @@ namespace GUI {
 		}
 
 		mousePressed = pressed;
+		if (board.signalPromote() == true)
+			showPromoteWindow = true;
 	}
 
 	void GUI::updatePromote()

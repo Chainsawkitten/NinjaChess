@@ -36,9 +36,15 @@ namespace Chess {
 			* @return Returns the boards current state
 			*/
 			GameState getState();
+
+			/// Checks if a pawn needs to promote
+			/**
+			* @return Returns true if a pawn needs to be promoted
+			*/
+			bool signalPromote();
 		private:
 			Piece* pieces[8][8];
-
+			bool needsToPromote = false;
 			King* whiteKing;
 			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
