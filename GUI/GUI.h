@@ -34,6 +34,7 @@ namespace GUI {
 		private:
 			void drawBoard();
 			void drawPieces();
+			void drawPromote();
 			bool highlighted(const Chess::Position& position);
 
 			int width, height;
@@ -42,6 +43,7 @@ namespace GUI {
 			std::map<char, const char*> notationMap;
 
 			sf::RenderWindow* window;
+			bool showPromoteWindow = true;
 			sf::Font font;
 			sf::Text text;
 

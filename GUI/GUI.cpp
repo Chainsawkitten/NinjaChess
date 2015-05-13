@@ -84,11 +84,50 @@ namespace GUI {
 
 	void GUI::render() {
 		window->clear();
-
-		drawBoard();
-		drawPieces();
-
+		if (showPromoteWindow == false)
+		{
+			drawBoard();
+			drawPieces();
+		}
+		else
+		{
+			drawPromote();
+		}
 		window->display();
+	}
+
+	void GUI::drawPromote()
+	{
+		Color brightSquare(224, 217, 190);
+		Color darkSquare(152, 145, 135);
+		RectangleShape square(Vector2f(width / 2.f, width / 2.f));
+		for (int x = 0; x < 2; x++) {
+			for (int y = 0; y < 2; y++) {
+				square.setPosition(x * width / 2.f, y * height / 2.f);
+
+				if (selected && selection == Position(x, 1 - y))
+					square.setFillColor(Color::Yellow);
+				else if (selected && highlighted(Position(x, 1 - y)))
+					square.setFillColor(Color::Green);
+				else if ((x + y) % 2 == 0)
+					square.setFillColor(brightSquare);
+				else
+					square.setFillColor(darkSquare);
+
+				window->draw(square);
+			}
+		}
+		char tempPromotes[4] = { 'q', 'R', 'B', 'n' };
+		int i = 0;
+		for (int x = 0; x < 2; x++) {
+			for (int y = 0; y < 2; y++) {
+				text.setCharacterSize(200.f);
+				text.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
+				text.setString(notationMap[tempPromotes[i]]);
+				i++;
+				window->draw(text);
+			}
+		}
 	}
 
 	void GUI::drawBoard() {
