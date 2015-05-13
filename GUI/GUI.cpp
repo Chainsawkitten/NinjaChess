@@ -45,10 +45,12 @@ namespace GUI {
 	}
 
 	void GUI::update() {
-		if (showPromoteWindow == true)
-			updatePromote();
-		else
+		if (showPromoteWindow == false){
 			updateGame();
+		}
+		else{
+			updatePromote();
+		}
 	}
 
 	void GUI::updateGame(){
@@ -93,10 +95,9 @@ namespace GUI {
 				}
 			}
 		}
-
-		mousePressed = pressed;
 		if (board.signalPromote() == true)
 			showPromoteWindow = true;
+		mousePressed = pressed;
 	}
 
 	void GUI::updatePromote()
@@ -109,27 +110,40 @@ namespace GUI {
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
+			Position tempPosition;
+			tempPosition.x = lastMovedPiece->getPosition().x;
+			tempPosition.y = lastMovedPiece->getPosition().y;
+			bool tempIsWhite = lastMovedPiece->isWhite();
 			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
+				printf("QUEEN");
 				text.setCharacterSize(height / 8);
-				lastMovedPiece = new Queen(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
+				delete lastMovedPiece;
+				lastMovedPiece = new Queen(tempPosition, tempIsWhite);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
+				printf("ROOK");
 				text.setCharacterSize(height / 8);
-				lastMovedPiece = new Rook(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
+				delete lastMovedPiece;
+				lastMovedPiece = new Rook(tempPosition, tempIsWhite);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
-				lastMovedPiece = new Bishop(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
+				printf("BISHOP");
+				delete lastMovedPiece;
+				lastMovedPiece = new Bishop(tempPosition, tempIsWhite);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
-				lastMovedPiece = new Knight(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
+				printf("KNIGHT");
+				delete lastMovedPiece;
+				lastMovedPiece = new Knight(tempPosition, tempIsWhite);
 				showPromoteWindow = false;
 			}
 		}
+		mousePressed = pressed;
 	}
 
 	void GUI::render() {
