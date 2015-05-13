@@ -32,4 +32,7 @@ namespace Chess {
 		return moves;
 	}
 
+	Position Piece::getPosition() const {
+		return position;
+	}
 }

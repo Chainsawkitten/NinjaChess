@@ -1,4 +1,9 @@
 #include "GUI.h"
+#include "Queen.h"
+#include "Rook.h"
+#include "Bishop.h"
+#include "Knight.h"
+
 
 using namespace sf;
 using namespace Chess;
@@ -64,6 +69,7 @@ namespace GUI {
 					Piece* selectedPiece = board.getPiece(selection);
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
+						lastMovedPiece = tempPiece;
 						selected = false;
 					}
 					else if (tempPiece != nullptr) {
@@ -105,18 +111,22 @@ namespace GUI {
 			Vector2i mousePos = Mouse::getPosition(*window);
 			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
 				text.setCharacterSize(height / 8);
+				lastMovedPiece = new Queen(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
 				text.setCharacterSize(height / 8);
+				lastMovedPiece = new Rook(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
+				lastMovedPiece = new Bishop(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
+				lastMovedPiece = new Knight(lastMovedPiece->getPosition(), lastMovedPiece->isWhite());
 				showPromoteWindow = false;
 			}
 		}

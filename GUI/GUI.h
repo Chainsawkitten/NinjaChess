@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Board.h>
+#include <Piece.h>
 #include <map>
 
 namespace GUI {
@@ -40,6 +41,8 @@ namespace GUI {
 
 			int width, height;
 			Chess::Board& board;
+
+			Chess::Piece* lastMovedPiece = nullptr;
 
 			std::map<char, const char*> notationMap;
 

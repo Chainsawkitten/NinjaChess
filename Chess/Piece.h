@@ -51,6 +51,8 @@ namespace Chess {
 			 */
 			virtual char notation() const = 0;
 
+			Position getPosition() const;
+
 		protected:
 			/// Position on the board.
 			Position position;
