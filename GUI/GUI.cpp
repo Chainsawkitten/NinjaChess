@@ -113,31 +113,23 @@ namespace GUI {
 			Position tempPosition = lastMovedPiece->getPosition();
 			bool tempIsWhite = lastMovedPiece->isWhite();
 			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
-				printf("QUEEN");
 				text.setCharacterSize(height / 8);
-				delete lastMovedPiece;
-				lastMovedPiece = new Queen(tempPosition, tempIsWhite);
+				board.promotePawn(lastMovedPiece, PromoteTypes::QUEEN);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
-				printf("ROOK");
 				text.setCharacterSize(height / 8);
-				delete lastMovedPiece;
-				lastMovedPiece = new Rook(tempPosition, tempIsWhite);
+				board.promotePawn(lastMovedPiece, PromoteTypes::ROOK);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
-				printf("BISHOP");
-				delete lastMovedPiece;
-				lastMovedPiece = new Bishop(tempPosition, tempIsWhite);
+				board.promotePawn(lastMovedPiece, PromoteTypes::BISHOP);
 				showPromoteWindow = false;
 			}
 			else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
-				printf("KNIGHT");
-				delete lastMovedPiece;
-				lastMovedPiece = new Knight(tempPosition, tempIsWhite);
+				board.promotePawn(lastMovedPiece, PromoteTypes::KNIGHT);
 				showPromoteWindow = false;
 			}
 		}

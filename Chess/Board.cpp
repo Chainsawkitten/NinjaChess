@@ -92,6 +92,8 @@ namespace Chess {
 
 					// TODO: En passant.
 
+
+					//Promote pawns
 					pieces[newPosition.x][newPosition.y] = piece;
 					piece->move(newPosition);
 					if(newPosition.y == 7 || newPosition.y == 0){
@@ -112,5 +114,23 @@ namespace Chess {
 		}
 
 		return false;
+	}
+
+	void Board::promotePawn(Piece* pawn, PromoteTypes type){
+		Position tempPosition = pawn->getPosition();
+		bool tempIsWhite = pawn->isWhite();
+		delete pawn;
+		if (type == PromoteTypes::QUEEN){
+			pawn = new Queen(tempPosition, tempIsWhite);
+		}
+		else if (type == PromoteTypes::ROOK){
+			pawn = new Rook(tempPosition, tempIsWhite);
+		}
+		else if (type == PromoteTypes::BISHOP){
+			pawn = new Bishop(tempPosition, tempIsWhite);
+		}
+		else if (type == PromoteTypes::KNIGHT){
+			pawn = new Knight(tempPosition, tempIsWhite);
+		}
 	}
 }

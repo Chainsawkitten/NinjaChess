@@ -42,6 +42,12 @@ namespace Chess {
 			* @return Returns true if a pawn needs to be promoted
 			*/
 			bool signalPromote();
+
+			/// Promotes a piece
+			/**
+			* @return void
+			*/
+			void promotePawn(Piece* pawn, PromoteTypes type);
 		private:
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
