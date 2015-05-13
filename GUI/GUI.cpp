@@ -40,7 +40,10 @@ namespace GUI {
 	}
 
 	void GUI::update() {
-		updateGame();
+		if (showPromoteWindow == true)
+			updatePromote();
+		else
+			updateGame();
 	}
 
 	void GUI::updateGame(){
@@ -88,6 +91,35 @@ namespace GUI {
 		mousePressed = pressed;
 	}
 
+	void GUI::updatePromote()
+	{
+		Event event;
+		while (window->pollEvent(event)) {
+			if (event.type == Event::Closed)
+				window->close();
+		}
+		bool pressed = Mouse::isButtonPressed(Mouse::Left);
+		if (pressed && !mousePressed){
+			Vector2i mousePos = Mouse::getPosition(*window);
+			if ((mousePos.x < width / 2.f) && (mousePos.y < height)){
+				text.setCharacterSize(height / 8);
+				showPromoteWindow = false;
+			}
+			else if ((mousePos.x > width / 2.f) && (mousePos.y < height)){
+				text.setCharacterSize(height / 8);
+				showPromoteWindow = false;
+			}
+			else if ((mousePos.x < width / 2.f) && (mousePos.y > height)){
+				text.setCharacterSize(height / 8);
+				showPromoteWindow = false;
+			}
+			else if ((mousePos.x < width / 2.f) && (mousePos.y > height)){
+				text.setCharacterSize(height / 8);
+				showPromoteWindow = false;
+			}
+		}
+	}
+
 	void GUI::render() {
 		window->clear();
 		if (showPromoteWindow == false)
@@ -127,7 +159,7 @@ namespace GUI {
 		int i = 0;
 		for (int x = 0; x < 2; x++) {
 			for (int y = 0; y < 2; y++) {
-				text.setCharacterSize(200.f);
+				text.setCharacterSize(height / 2);
 				text.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
 				text.setString(notationMap[tempPromotes[i]]);
 				i++;
