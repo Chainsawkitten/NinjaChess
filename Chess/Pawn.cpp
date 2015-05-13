@@ -7,6 +7,19 @@ namespace Chess {
 		lastMoveWasDouble = false;
 	}
 
+	void Pawn::move(const Position& newPosition) {
+		position = newPosition;
+		_hasMoved = true;
+
+		int distanceMoved = abs(position.y - newPosition.y);
+		if (distanceMoved == 2){
+			lastMoveWasDouble = true;
+		}
+		else{
+			lastMoveWasDouble = false;
+		}
+	}
+
 	std::vector<Position> Pawn::legalMoves(const Board& board) const {
 		std::vector<Position> moves;
 

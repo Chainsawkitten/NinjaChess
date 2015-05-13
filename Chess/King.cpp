@@ -7,6 +7,11 @@ namespace Chess {
 
 	}
 
+	void King::move(const Position& newPosition) {
+		position = newPosition;
+		_hasMoved = true;
+	}
+
 	char King::notation() const {
 		return isWhite() ? 'K' : 'k';
 	}

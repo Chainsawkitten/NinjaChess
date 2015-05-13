@@ -7,6 +7,11 @@ namespace Chess {
 
 	}
 
+	void Rook::move(const Position& newPosition) {
+		position = newPosition;
+		_hasMoved = true;
+	}
+
 	char Rook::notation() const {
 		return isWhite() ? 'R' : 'r';
 	}

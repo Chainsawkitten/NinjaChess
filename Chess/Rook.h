@@ -14,6 +14,12 @@ namespace Chess {
 		*/
 		Rook(const Position& position, bool white);
 
+		/// Move the piece to another position.
+		/**
+		* @param newPosition %Position to move the piece to.
+		*/
+		void move(const Position& newPosition);
+
 		/// Get the notation of the piece.
 		/**
 		* @return FEN-notation of the piece.
@@ -27,6 +33,8 @@ namespace Chess {
 		* @return A list of all the legal moves.
 		*/
 		std::vector<Position> legalMoves(const Board& board) const;
+	private:
+		bool _hasMoved;
 	};
 }
 
