@@ -12,6 +12,32 @@ namespace Chess {
 		_hasMoved = true;
 	}
 
+	bool King::hasMoved()const{
+		return _hasMoved;
+	}
+
+	bool King::isChecked(const Board& board) const {
+
+		for (int i = 0; i < 8; i++){
+			for (int j = 0; j < 8; j++){
+				Position tempPos;
+				tempPos.x = i;
+				tempPos.y = j;
+				Piece *tempPiece = board.getPiece(tempPos);
+
+				if (tempPiece != nullptr && (isWhite()!=tempPiece->isWhite())){
+					std::vector<Chess::Position> moves = tempPiece->legalMoves(board);
+					for (Chess::Position move : moves){
+						if (move == position){
+							return true;
+						}
+					}
+				}
+			}
+		} 
+		return false;
+	}
+
 	char King::notation() const {
 		return isWhite() ? 'K' : 'k';
 	}

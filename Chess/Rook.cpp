@@ -12,6 +12,10 @@ namespace Chess {
 		_hasMoved = true;
 	}
 
+	bool Rook::hasMoved()const{
+		return _hasMoved;
+	}
+
 	char Rook::notation() const {
 		return isWhite() ? 'R' : 'r';
 	}

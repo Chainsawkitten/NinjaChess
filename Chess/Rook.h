@@ -14,6 +14,12 @@ namespace Chess {
 		*/
 		Rook(const Position& position, bool white);
 
+		///Check if piece has moved
+		/**
+		* @return whether piece has moved or not
+		*/
+		bool hasMoved()const;
+
 		/// Move the piece to another position.
 		/**
 		* @param newPosition %Position to move the piece to.

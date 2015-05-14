@@ -15,6 +15,19 @@ namespace Chess {
 			* @param white Whether the piece belongs to the white player.
 			*/
 			King(const Position& position, bool white);
+			
+			///Check if piece has moved
+			/**
+			* @return whether piece has moved or not
+			*/
+			bool hasMoved()const;
+
+			/// Test if king is checked
+			/**
+			* @param board %Board
+			* @return whether king is checked or not
+			*/
+			bool isChecked(const Board& board) const;
 
 			/// Move the piece to another position.
 			/**
