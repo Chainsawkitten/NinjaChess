@@ -23,6 +23,8 @@ namespace Chess {
 		for (int x = 0; x < 8; x++) {
 			pieces[x][1] = new Pawn(Position(x, 1), true);
 		}
+		pieces[4][4] = new King(Position(4, 4), true);
+		pieces[0][4] = new Rook(Position(0, 4), true);
 
 		// Rooks
 		pieces[0][7] = new Rook(Position(0, 7), false);
@@ -78,6 +80,7 @@ namespace Chess {
 
 	bool Board::move(const Position& oldPosition, const Position& newPosition) {
 		Piece* piece = getPiece(oldPosition);
+		Piece* targetPiece = getPiece(newPosition);
 
 		if (piece != nullptr) {
 			// Check if the piece is of the right color.
@@ -86,22 +89,46 @@ namespace Chess {
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
-					// Delete captured piece.
-					if (pieces[newPosition.x][newPosition.y] != nullptr)
+					//En passant.
+					if (pieces[newPosition.x][newPosition.y] == nullptr && (piece->notation() == 'p' || piece->notation() == 'P') && newPosition.x != oldPosition.x){
+						if (piece->isWhite()){
+							delete pieces[newPosition.x][newPosition.y - 1];
+						}
+						else{
+							delete pieces[newPosition.x][newPosition.y + 1];
+						}
+					}
+
+					//Castling
+					if (piece->notation() == 'k' || piece->notation() == 'K'){
+						if (newPosition.x - oldPosition.x == 2){
+							Piece* tempPiece = getPiece(Position(7, newPosition.y));
+							pieces[7][newPosition.y] = nullptr;
+							pieces[5][newPosition.y] = tempPiece;
+							tempPiece->move(Position(5, newPosition.y));
+						}
+						else if (newPosition.x - oldPosition.x == -2){
+							Piece* tempPiece = getPiece(Position(0, newPosition.y));
+							pieces[0][newPosition.y] = nullptr;
+							pieces[3][newPosition.y] = tempPiece;
+							tempPiece->move(Position(3, newPosition.y));
+						}
+					}
+					// Delete captured enemy piece.
+					if (pieces[newPosition.x][newPosition.y] != nullptr && piece->isWhite() != targetPiece->isWhite()){
 						delete pieces[newPosition.x][newPosition.y];
+					}
 
-					// TODO: En passant.
-
-
-					//Promote pawns
+					// Update pieces and piece position
 					pieces[newPosition.x][newPosition.y] = piece;
 					piece->move(newPosition);
+
+					//Promote pawns
 					if(newPosition.y == 7 || newPosition.y == 0){
 						if (piece->notation() == 'p' || piece->notation() == 'P'){
 							needsToPromote = true;
 						}
 					}
-					// TODO: Castling, promotion, pawn double move.
 
 					turn++;
 					if (state == GameState::BLACKPLAYS)
