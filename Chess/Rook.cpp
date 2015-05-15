@@ -4,7 +4,7 @@
 
 namespace Chess {
 	Rook::Rook(const Position& position, bool white) : Piece(position, white) {
-
+		_hasMoved = false;
 	}
 
 	void Rook::move(const Position& newPosition) {

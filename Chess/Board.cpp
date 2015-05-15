@@ -25,6 +25,7 @@ namespace Chess {
 		}
 		pieces[4][4] = new King(Position(4, 4), true);
 		pieces[0][4] = new Rook(Position(0, 4), true);
+		pieces[7][4] = new Rook(Position(7, 4), true);
 
 		// Rooks
 		pieces[0][7] = new Rook(Position(0, 7), false);
