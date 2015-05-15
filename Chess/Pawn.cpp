@@ -8,7 +8,6 @@ namespace Chess {
 	}
 
 	void Pawn::move(const Position& newPosition) {
-		position = newPosition;
 		_hasMoved = true;
 
 		int distanceMoved = abs(position.y - newPosition.y);
@@ -18,6 +17,8 @@ namespace Chess {
 		else{
 			lastMoveWasDouble = false;
 		}
+		position = newPosition;
+
 	}
 
 	std::vector<Position> Pawn::legalMoves(const Board& board) const {
@@ -61,7 +62,8 @@ namespace Chess {
 			}
 			if (enPassantPawn.valid()) {
 				Pawn* tempEnPassant = dynamic_cast<Pawn *>(board.getPiece(enPassantPawn));
-				if (tempEnPassant != nullptr && tempEnPassant->lastMoveWasDouble && ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite()))) {
+				if (tempEnPassant != nullptr && tempEnPassant->lastMoveWasDouble 
+					&& ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite())) && tempEnPassant->isWhite()!=isWhite()) {
 					enPassantPawn.y += direction;
 					moves.push_back(enPassantPawn);
 				}

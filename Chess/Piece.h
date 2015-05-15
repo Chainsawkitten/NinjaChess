@@ -27,7 +27,7 @@ namespace Chess {
 			/**
 			 * @param newPosition %Position to move the piece to.
 			 */
-			void move(const Position& newPosition);
+			virtual void move(const Position& newPosition);
 
 			/// Get whether a move is legal.
 			/**

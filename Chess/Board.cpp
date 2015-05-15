@@ -23,9 +23,6 @@ namespace Chess {
 		for (int x = 0; x < 8; x++) {
 			pieces[x][1] = new Pawn(Position(x, 1), true);
 		}
-		pieces[4][4] = new King(Position(4, 4), true);
-		pieces[0][4] = new Rook(Position(0, 4), true);
-		pieces[7][4] = new Rook(Position(7, 4), true);
 
 		// Rooks
 		pieces[0][7] = new Rook(Position(0, 7), false);
@@ -94,9 +91,11 @@ namespace Chess {
 					if (pieces[newPosition.x][newPosition.y] == nullptr && (piece->notation() == 'p' || piece->notation() == 'P') && newPosition.x != oldPosition.x){
 						if (piece->isWhite()){
 							delete pieces[newPosition.x][newPosition.y - 1];
+							pieces[newPosition.x][newPosition.y - 1] = nullptr;
 						}
 						else{
 							delete pieces[newPosition.x][newPosition.y + 1];
+							pieces[newPosition.x][newPosition.y + 1] = nullptr;
 						}
 					}
 
