@@ -62,7 +62,7 @@ namespace Chess {
 		}
 	}
 
-	GameState Board::getState(){
+	GameState Board::getState()const{
 		return state;
 	}
 
@@ -158,6 +158,14 @@ namespace Chess {
 		}
 		else if (type == PromoteTypes::KNIGHT){
 			pawn = new Knight(tempPosition, tempIsWhite);
+		}
+	}
+	King* Board::getKing(bool isWhite)const{
+		if (isWhite){
+			return whiteKing;
+		}
+		else{
+			return blackKing;
 		}
 	}
 }

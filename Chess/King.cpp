@@ -17,24 +17,25 @@ namespace Chess {
 	}
 
 	bool King::isChecked(const Board& board) const {
+		if (board.getState() == GameState::WHITEPLAYS && isWhite() || board.getState() == GameState::BLACKPLAYS && !isWhite()){
+			for (int i = 0; i < 8; i++){
+				for (int j = 0; j < 8; j++){
+					Position tempPos;
+					tempPos.x = i;
+					tempPos.y = j;
+					Piece *tempPiece = board.getPiece(tempPos);
 
-		for (int i = 0; i < 8; i++){
-			for (int j = 0; j < 8; j++){
-				Position tempPos;
-				tempPos.x = i;
-				tempPos.y = j;
-				Piece *tempPiece = board.getPiece(tempPos);
-
-				if (tempPiece != nullptr && (isWhite() != tempPiece->isWhite()) && !tempPiece->notation() == 'k' && tempPiece->notation() == 'K'){
-					std::vector<Position> moves = tempPiece->legalMoves(board);
-					for (Position move : moves){
-						if (move == position){
-							return true;
+					if (tempPiece != nullptr && (isWhite() != tempPiece->isWhite()) && !tempPiece->notation() == 'k' && tempPiece->notation() == 'K'){
+						std::vector<Position> moves = tempPiece->legalMoves(board);
+						for (Position move : moves){
+							if (move == position){
+								return true;
+							}
 						}
 					}
 				}
 			}
-		} 
+		}
 		return false;
 	}
 

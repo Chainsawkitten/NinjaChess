@@ -35,7 +35,7 @@ namespace Chess {
 			/**
 			* @return Returns the boards current state
 			*/
-			GameState getState();
+			GameState getState() const;
 
 			/// Checks if a pawn needs to promote
 			/**
@@ -48,6 +48,13 @@ namespace Chess {
 			* @return void
 			*/
 			void promotePawn(Piece* pawn, PromoteTypes type);
+
+			/// Get king
+			/**
+			* @param white or black king
+			* @return king
+			*/
+			King* getKing(bool isWhite)const;
 		private:
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
