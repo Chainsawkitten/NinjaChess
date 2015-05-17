@@ -129,6 +129,13 @@ namespace Chess {
 							needsToPromote = true;
 						}
 					}
+					// Set and reset lastMovedPiece
+					if (lastMovedPawn != nullptr){
+						if (lastMovedPawn->getLastMoveWasDouble()){
+							//lastMovedPawn->resetLastMoveWasDouble(); //orsakar krasch..
+						}
+					}
+					lastMovedPawn = dynamic_cast<Pawn *>(getPiece(newPosition));
 
 					turn++;
 					if (state == GameState::BLACKPLAYS)

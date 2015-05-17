@@ -3,6 +3,7 @@
 
 #include "Piece.h"
 #include "King.h"
+#include "Pawn.h"
 
 namespace Chess {
 	enum class GameState{WHITEPLAYS, BLACKPLAYS, WHITEWIN, BLACKWIN, DRAW};
@@ -56,6 +57,7 @@ namespace Chess {
 			*/
 			King* getKing(bool isWhite)const;
 		private:
+			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
 			King* whiteKing;

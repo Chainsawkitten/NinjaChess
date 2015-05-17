@@ -20,6 +20,18 @@ namespace Chess {
 			*/
 			void move(const Position& newPosition);
 
+			/// reset last move double
+			/**
+			* @return void
+			*/
+			void resetLastMoveWasDouble();
+
+			/// get last move double
+			/**
+			* @return whether last move was double
+			*/
+			bool getLastMoveWasDouble()const;
+
 			/// Get valid moves.
 			/**
 			* @param board %Board.
@@ -35,6 +47,7 @@ namespace Chess {
 			char notation() const;
 	private:
 		bool _hasMoved;
+	protected:
 		bool lastMoveWasDouble;
 
 	};

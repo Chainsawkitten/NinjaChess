@@ -72,7 +72,12 @@ namespace Chess {
 
 		return moves;
 	}
-
+	void Pawn::resetLastMoveWasDouble(){
+		lastMoveWasDouble = false;
+	}
+	bool Pawn::getLastMoveWasDouble()const{
+		return lastMoveWasDouble;
+	}
 	char Pawn::notation() const {
 		return isWhite() ? 'P' : 'p';
 	}
