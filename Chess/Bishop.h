@@ -18,7 +18,7 @@ namespace Chess {
 		/**
 		* Gets moves without checking if it'll leave the king in check.
 		* @param board %Board.
-		* @return A lost of all potential moves.
+		* @return A list of all potential moves.
 		*/
 		std::vector<Position> moves(const Board& board) const;
 
