@@ -6,8 +6,12 @@
 #include "Pawn.h"
 
 namespace Chess {
-	enum class GameState{WHITEPLAYS, BLACKPLAYS, WHITEWIN, BLACKWIN, DRAW};
-	enum class PromoteTypes{ROOK, KNIGHT, BISHOP, QUEEN};
+	/// Game states.
+	enum class GameState { WHITEPLAYS, BLACKPLAYS, WHITEWIN, BLACKWIN, DRAW };
+
+	/// Types a pawn can be promoted to.
+	enum class PromoteTypes { ROOK, KNIGHT, BISHOP, QUEEN };
+
 	/// Chess board.
 	class Board {
 		public:
@@ -32,30 +36,31 @@ namespace Chess {
 			 */
 			bool move(const Position& oldPosition, const Position& newPosition);
 
-			/// Returns the boards current state
+			/// Gets the board's current state.
 			/**
-			* @return Returns the boards current state
-			*/
+			 * @return The board's current state
+			 */
 			GameState getState() const;
 
-			/// Checks if a pawn needs to promote
+			/// Checks if a pawn needs to promote.
 			/**
-			* @return Returns true if a pawn needs to be promoted
-			*/
+			 * @return Whether a pawn needs to be promoted
+			 */
 			bool signalPromote();
 
 			/// Promotes a piece
 			/**
-			* @return void
-			*/
+			 * @return void
+			 */
 			void promotePawn(Piece* pawn, PromoteTypes type);
 
-			/// Get king
+			/// Get the king of a certain color.
 			/**
-			* @param white or black king
-			* @return king
-			*/
-			King* getKing(bool isWhite)const;
+			 * @param white Whether to get the white or black king.
+			 * @return The king of the specified color
+			 */
+			King* getKing(bool white) const;
+
 		private:
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];

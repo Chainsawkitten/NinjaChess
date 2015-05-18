@@ -171,8 +171,8 @@ namespace Chess {
 		}
 	}
 
-	King* Board::getKing(bool isWhite) const {
-		if (isWhite) {
+	King* Board::getKing(bool white) const {
+		if (white) {
 			return whiteKing;
 		} else {
 			return blackKing;
