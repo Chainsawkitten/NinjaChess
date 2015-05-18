@@ -62,7 +62,7 @@ namespace Chess {
 		}
 	}
 
-	GameState Board::getState()const{
+	GameState Board::getState() const {
 		return state;
 	}
 
@@ -70,7 +70,7 @@ namespace Chess {
 		return pieces[position.x][position.y];
 	}
 
-	bool Board::signalPromote(){
+	bool Board::signalPromote() {
 		bool temp = needsToPromote;
 		needsToPromote = false;
 		return temp;
@@ -150,28 +150,31 @@ namespace Chess {
 		return false;
 	}
 
-	void Board::promotePawn(Piece* pawn, PromoteTypes type){
-		Position tempPosition = pawn->getPosition();
-		bool tempIsWhite = pawn->isWhite();
+	void Board::promotePawn(Piece* pawn, PromoteTypes type) {
+		Position position = pawn->getPosition();
+		bool white = pawn->isWhite();
 		delete pawn;
-		if (type == PromoteTypes::QUEEN){
-			pawn = new Queen(tempPosition, tempIsWhite);
-		}
-		else if (type == PromoteTypes::ROOK){
-			pawn = new Rook(tempPosition, tempIsWhite);
-		}
-		else if (type == PromoteTypes::BISHOP){
-			pawn = new Bishop(tempPosition, tempIsWhite);
-		}
-		else if (type == PromoteTypes::KNIGHT){
-			pawn = new Knight(tempPosition, tempIsWhite);
+
+		switch (type) {
+		case PromoteTypes::QUEEN:
+			pieces[position.x][position.y] = new Queen(position, white);
+			break;
+		case PromoteTypes::ROOK:
+			pieces[position.x][position.y] = new Rook(position, white);
+			break;
+		case PromoteTypes::BISHOP:
+			pieces[position.x][position.y] = new Bishop(position, white);
+			break;
+		case PromoteTypes::KNIGHT:
+			pieces[position.x][position.y] = new Knight(position, white);
+			break;
 		}
 	}
-	King* Board::getKing(bool isWhite)const{
-		if (isWhite){
+
+	King* Board::getKing(bool isWhite) const {
+		if (isWhite) {
 			return whiteKing;
-		}
-		else{
+		} else {
 			return blackKing;
 		}
 	}

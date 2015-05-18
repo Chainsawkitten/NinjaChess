@@ -100,8 +100,7 @@ namespace GUI {
 		mousePressed = pressed;
 	}
 
-	void GUI::updatePromote()
-	{
+	void GUI::updatePromote() {
 		Event event;
 		while (window->pollEvent(event)) {
 			if (event.type == Event::Closed)
@@ -116,18 +115,15 @@ namespace GUI {
 				text.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::QUEEN);
 				showPromoteWindow = false;
-			}
-			else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
+			} else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
 				text.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::ROOK);
 				showPromoteWindow = false;
-			}
-			else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
+			} else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::BISHOP);
 				showPromoteWindow = false;
-			}
-			else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
+			} else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
 				text.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::KNIGHT);
 				showPromoteWindow = false;
@@ -138,20 +134,16 @@ namespace GUI {
 
 	void GUI::render() {
 		window->clear();
-		if (showPromoteWindow == false)
-		{
+		if (!showPromoteWindow) {
 			drawBoard();
 			drawPieces();
-		}
-		else
-		{
+		} else {
 			drawPromote();
 		}
 		window->display();
 	}
 
-	void GUI::drawPromote()
-	{
+	void GUI::drawPromote() {
 		Color brightSquare(224, 217, 190);
 		Color darkSquare(152, 145, 135);
 		RectangleShape square(Vector2f(width / 2.f, width / 2.f));

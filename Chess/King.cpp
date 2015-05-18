@@ -25,7 +25,7 @@ namespace Chess {
 					tempPos.y = j;
 					Piece *tempPiece = board.getPiece(tempPos);
 
-					if (tempPiece != nullptr && (isWhite() != tempPiece->isWhite()) && !tempPiece->notation() == 'k' && tempPiece->notation() == 'K'){
+					if (tempPiece != nullptr && (isWhite() != tempPiece->isWhite()) && !(tempPiece->notation() == 'k') && (tempPiece->notation() == 'K')){
 						std::vector<Position> moves = tempPiece->legalMoves(board);
 						for (Position move : moves){
 							if (move == position){
