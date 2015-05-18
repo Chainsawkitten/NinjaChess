@@ -5,6 +5,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "King.h"
+#include <sstream>
 
 namespace Chess {
 	Board::Board() {
@@ -167,6 +168,33 @@ namespace Chess {
 			break;
 		}
 		needsToPromote = false;
+	}
+
+	std::string Board::boardToFENString() const{
+		std::string tempstring;
+		int emptyCounter = 0;
+		for (int y = 7; y >= 0; y--){
+			for (int x = 0; x < 8; x++){
+				if (pieces[x][y] == nullptr)
+					emptyCounter++;
+				else{
+					if (emptyCounter != 0)
+						tempstring += std::to_string(emptyCounter);
+					tempstring.append(1, pieces[x][y]->notation());
+					emptyCounter = 0;
+				}
+			}
+			if (emptyCounter != 0){
+				tempstring += std::to_string(emptyCounter);
+				emptyCounter = 0;
+			}
+			tempstring += '/';
+		}
+		if (state == GameState::BLACKPLAYS)
+			tempstring += " w ";
+		else
+			tempstring += " b ";
+		return tempstring;
 	}
 
 	King* Board::getKing(bool white) const {

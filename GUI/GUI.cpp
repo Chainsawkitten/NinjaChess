@@ -4,6 +4,7 @@
 #include "Bishop.h"
 #include "Knight.h"
 
+#include <iostream>
 #include <ctype.h>
 
 
@@ -74,6 +75,8 @@ namespace GUI {
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
 						lastMovedPiece = selectedPiece;
+						std::string tempstring = board.boardToFENString();
+						std::cout << tempstring <<'\n';
 						selected = false;
 					} else if (tempPiece != nullptr) {
 						if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))

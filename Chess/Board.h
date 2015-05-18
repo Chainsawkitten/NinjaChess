@@ -60,7 +60,12 @@ namespace Chess {
 			 * @return The king of the specified color
 			 */
 			King* getKing(bool white) const;
-
+			
+			/// Get FEN notation string describing the board
+			/**
+			* @return FEN notated string
+			*/
+			std::string boardToFENString() const;
 		private:
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
@@ -68,6 +73,7 @@ namespace Chess {
 			King* whiteKing;
 			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
+			std::vector<std::string> previousBoards;
 
 			int turn = 0;
 	};
