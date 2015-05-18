@@ -4,6 +4,7 @@
 #include "Piece.h"
 #include "King.h"
 #include "Pawn.h"
+#include <map>
 
 namespace Chess {
 	/// Game states.
@@ -73,7 +74,8 @@ namespace Chess {
 			/**
 			* @return FEN notated string
 			*/
-			std::string boardToFENString() const;
+			std::string toFENString(bool addExtraData) const;
+
 		private:
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
@@ -82,7 +84,9 @@ namespace Chess {
 			King* whiteKing;
 			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
-			std::vector<std::string> previousBoards;
+			void addBoardToMap();
+			bool isThreeFoldRepitition();
+			std::map<std::string, int> previousBoards;
 
 			int turn = 0;
 	};

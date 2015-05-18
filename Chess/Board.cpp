@@ -5,6 +5,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "King.h"
+#include <iostream>
 #include <sstream>
 
 namespace Chess {
@@ -50,6 +51,7 @@ namespace Chess {
 		// Kings
 		pieces[4][7] = new King(Position(4, 7), false);
 		pieces[4][0] = new King(Position(4, 0), true);
+		addBoardToMap();
 	}
 
 	Board::~Board() {
@@ -144,6 +146,11 @@ namespace Chess {
 						state = GameState::WHITEPLAYS;
 					else
 						state = GameState::BLACKPLAYS;
+
+					std::string tempstring = toFENString(false);
+					std::cout << tempstring << '\n';
+					addBoardToMap();
+					isThreeFoldRepitition();
 					return true;
 				}
 			}
@@ -219,8 +226,17 @@ namespace Chess {
 		}
 		needsToPromote = false;
 	}
+	void Board::addBoardToMap() {
+		std::string tempstring = toFENString(false);
+		if (previousBoards.find(tempstring) == previousBoards.end()){
+			previousBoards[tempstring] = 0;
+		}
+		else{ 
+			previousBoards[tempstring] += 1;
+		}
+	}
 
-	std::string Board::boardToFENString() const{
+	std::string Board::toFENString(bool addExtraData) const{
 		std::string tempstring;
 		int emptyCounter = 0;
 		for (int y = 7; y >= 0; y--){
@@ -242,15 +258,27 @@ namespace Chess {
 		}
 		//Who played the turn?
 		if (state == GameState::BLACKPLAYS)
-			tempstring += " w ";
+			tempstring += "w";
 		else
-			tempstring += " b ";
-		//Number of half turns since last capture or pawn move.
-		tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
+			tempstring += "b";
 
-		//Number of full moves.
-		tempstring += std::to_string((turn+1) / 2);
+		if (addExtraData == true)
+		{
+			//Number of half turns since last capture or pawn move.
+			tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
+			//Number of full moves.
+			tempstring += std::to_string((turn+1) / 2);
+		}
 		return tempstring;
+	}
+
+	bool Board::isThreeFoldRepitition(){
+		if (previousBoards[toFENString(false)] == 3){
+			std::cout << "Threefold repitition\n";
+			return true;
+		}
+		else
+			return false;
 	}
 
 	King* Board::getKing(bool white) const {
