@@ -87,55 +87,54 @@ namespace Chess {
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
-					//En passant.
+					// En passant.
 					if (pieces[newPosition.x][newPosition.y] == nullptr && (piece->notation() == 'p' || piece->notation() == 'P') && newPosition.x != oldPosition.x){
-						if (piece->isWhite()){
+						if (piece->isWhite()) {
 							delete pieces[newPosition.x][newPosition.y - 1];
 							pieces[newPosition.x][newPosition.y - 1] = nullptr;
-						}
-						else{
+						} else {
 							delete pieces[newPosition.x][newPosition.y + 1];
 							pieces[newPosition.x][newPosition.y + 1] = nullptr;
 						}
 					}
 
 					//Castling
-					if (piece->notation() == 'k' || piece->notation() == 'K'){
+					if (piece->notation() == 'k' || piece->notation() == 'K') {
 						if (newPosition.x - oldPosition.x == 2){
 							Piece* tempPiece = getPiece(Position(7, newPosition.y));
 							pieces[7][newPosition.y] = nullptr;
 							pieces[5][newPosition.y] = tempPiece;
 							tempPiece->move(Position(5, newPosition.y));
-						}
-						else if (newPosition.x - oldPosition.x == -2){
+						} else if (newPosition.x - oldPosition.x == -2) {
 							Piece* tempPiece = getPiece(Position(0, newPosition.y));
 							pieces[0][newPosition.y] = nullptr;
 							pieces[3][newPosition.y] = tempPiece;
 							tempPiece->move(Position(3, newPosition.y));
 						}
 					}
+
 					// Delete captured enemy piece.
-					if (pieces[newPosition.x][newPosition.y] != nullptr && piece->isWhite() != targetPiece->isWhite()){
+					if (pieces[newPosition.x][newPosition.y] != nullptr)
 						delete pieces[newPosition.x][newPosition.y];
-					}
 
 					// Update pieces and piece position
 					pieces[newPosition.x][newPosition.y] = piece;
 					piece->move(newPosition);
 
-					//Promote pawns
+					// Promote pawns
 					if(newPosition.y == 7 || newPosition.y == 0){
 						if (piece->notation() == 'p' || piece->notation() == 'P'){
 							needsToPromote = true;
 						}
 					}
+
 					// Set and reset lastMovedPiece
 					if (lastMovedPawn != nullptr){
 						if (lastMovedPawn->getLastMoveWasDouble()){
 							//lastMovedPawn->resetLastMoveWasDouble(); //orsakar krasch..
 						}
 					}
-					lastMovedPawn = dynamic_cast<Pawn *>(getPiece(newPosition));
+					lastMovedPawn = dynamic_cast<Pawn*>(getPiece(newPosition));
 
 					turn++;
 					if (state == GameState::BLACKPLAYS)
