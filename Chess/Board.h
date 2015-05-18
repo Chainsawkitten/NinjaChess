@@ -54,7 +54,7 @@ namespace Chess {
 			/**
 			 * @return Whether a pawn needs to be promoted
 			 */
-			bool signalPromote();
+			bool mustPromote();
 
 			/// Promotes a piece
 			/**
@@ -68,12 +68,18 @@ namespace Chess {
 			 * @return The king of the specified color
 			 */
 			King* getKing(bool white) const;
-
+			
+			/// Get FEN notation string describing the board
+			/**
+			* @return FEN notated string
+			*/
+			std::string boardToFENString() const;
 		private:
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
 			GameState state = GameState::WHITEPLAYS;
+			std::vector<std::string> previousBoards;
 
 			int turn = 0;
 	};
