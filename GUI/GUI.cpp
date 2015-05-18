@@ -96,7 +96,7 @@ namespace GUI {
 			}
 		}
 
-		if (board.signalPromote())
+		if (board.mustPromote())
 			showPromoteWindow = true;
 
 		mousePressed = pressed;

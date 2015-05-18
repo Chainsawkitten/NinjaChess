@@ -46,7 +46,7 @@ namespace Chess {
 			/**
 			 * @return Whether a pawn needs to be promoted
 			 */
-			bool signalPromote();
+			bool mustPromote();
 
 			/// Promotes a piece
 			/**

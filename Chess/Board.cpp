@@ -70,10 +70,8 @@ namespace Chess {
 		return pieces[position.x][position.y];
 	}
 
-	bool Board::signalPromote() {
-		bool temp = needsToPromote;
-		needsToPromote = false;
-		return temp;
+	bool Board::mustPromote() {
+		return needsToPromote;
 	}
 
 	bool Board::move(const Position& oldPosition, const Position& newPosition) {
@@ -168,6 +166,7 @@ namespace Chess {
 			pieces[position.x][position.y] = new Knight(position, white);
 			break;
 		}
+		needsToPromote = false;
 	}
 
 	King* Board::getKing(bool white) const {
