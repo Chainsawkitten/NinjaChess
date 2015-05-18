@@ -80,6 +80,7 @@ namespace Chess {
 		if (piece != nullptr) {
 			// Check if the piece is of the right color.
 			if (piece->isWhite() == (turn % 2 == 0)) {
+				halfMovesSinceCapture++;
 				// Check if the move is legal.
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
@@ -89,9 +90,11 @@ namespace Chess {
 						if (piece->isWhite()) {
 							delete pieces[newPosition.x][newPosition.y - 1];
 							pieces[newPosition.x][newPosition.y - 1] = nullptr;
+							halfMovesSinceCapture = 0;
 						} else {
 							delete pieces[newPosition.x][newPosition.y + 1];
 							pieces[newPosition.x][newPosition.y + 1] = nullptr;
+							halfMovesSinceCapture = 0;
 						}
 					}
 
@@ -111,11 +114,14 @@ namespace Chess {
 					}
 
 					// Delete captured enemy piece.
-					if (pieces[newPosition.x][newPosition.y] != nullptr)
+					if (pieces[newPosition.x][newPosition.y] != nullptr){
 						delete pieces[newPosition.x][newPosition.y];
-
+						halfMovesSinceCapture = 0;
+					}
 					// Update pieces and piece position
 					pieces[newPosition.x][newPosition.y] = piece;
+					if (piece->notation() == 'p' || piece->notation() == 'P')
+						halfMovesSinceCapture = 0;
 					piece->move(newPosition);
 
 					// Promote pawns
@@ -234,10 +240,16 @@ namespace Chess {
 			}
 			tempstring += '/';
 		}
+		//Who played the turn?
 		if (state == GameState::BLACKPLAYS)
 			tempstring += " w ";
 		else
 			tempstring += " b ";
+		//Number of half turns since last capture or pawn move.
+		tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
+
+		//Number of full moves.
+		tempstring += std::to_string((turn+1) / 2);
 		return tempstring;
 	}
 

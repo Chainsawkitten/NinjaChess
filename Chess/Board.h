@@ -78,6 +78,9 @@ namespace Chess {
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
+			int halfMovesSinceCapture = 0;
+			King* whiteKing;
+			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
 			std::vector<std::string> previousBoards;
 
