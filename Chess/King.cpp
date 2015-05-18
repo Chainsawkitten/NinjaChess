@@ -35,9 +35,11 @@ namespace Chess {
 		// Check opponent's king.
 		for (int x = position.x - 1; x <= position.x + 1; x++) {
 			for (int y = position.y - 1; y <= position.x + 1; y++) {
-				Piece* piece = board.getPiece(Position(x, y));
-				if (piece != nullptr && piece->isWhite() != isWhite() && (piece->notation() == 'k' || piece->notation() == 'K'))
-					return true;
+				if (Position(x, y).valid()) {
+					Piece* piece = board.getPiece(Position(x, y));
+					if (piece != nullptr && piece->isWhite() != isWhite() && (piece->notation() == 'k' || piece->notation() == 'K'))
+						return true;
+				}
 			}
 		}
 
@@ -95,13 +97,13 @@ namespace Chess {
 					}
 				}
 			}
-			if (leftCastling){
+			if (leftCastling)
 				validPosition.push_back(Position(position.x - 2, position.y));
-			}
-			if (rightCastling){
+
+			if (rightCastling)
 				validPosition.push_back(Position(position.x + 2, position.y));
-			}
 		}
+
 		return validPosition;
 	}
 }

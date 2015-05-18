@@ -13,12 +13,10 @@ namespace Chess {
 		int distanceMoved = abs(position.y - newPosition.y);
 		if (distanceMoved == 2){
 			lastMoveWasDouble = true;
-		}
-		else{
+		} else {
 			lastMoveWasDouble = false;
 		}
 		position = newPosition;
-
 	}
 
 	std::vector<Position> Pawn::moves(const Board& board) const {
@@ -73,12 +71,15 @@ namespace Chess {
 
 		return moves;
 	}
+
 	void Pawn::resetLastMoveWasDouble(){
 		lastMoveWasDouble = false;
 	}
+
 	bool Pawn::getLastMoveWasDouble()const{
 		return lastMoveWasDouble;
 	}
+
 	char Pawn::notation() const {
 		return isWhite() ? 'P' : 'p';
 	}

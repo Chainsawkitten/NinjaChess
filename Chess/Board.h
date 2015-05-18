@@ -36,6 +36,14 @@ namespace Chess {
 			 */
 			bool move(const Position& oldPosition, const Position& newPosition);
 
+			/// Check whether king will be checked after a move.
+			/**
+			 * @param oldPosition %Position where the piece is.
+			 * @param newPosition %Position to move the piece to.
+			 * @return Whether the king is in check after the move
+			 */
+			bool willLeaveKingChecked(const Position& oldPosition, const Position& newPosition);
+
 			/// Gets the board's current state.
 			/**
 			 * @return The board's current state
@@ -65,8 +73,6 @@ namespace Chess {
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
-			King* whiteKing;
-			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
 
 			int turn = 0;

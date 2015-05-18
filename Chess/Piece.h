@@ -35,7 +35,7 @@ namespace Chess {
 			 * @param newPosition %Position to move to.
 			 * @return Whether it's a legal move
 			 */
-			bool isLegal(const Board& board, const Position& newPosition) const;
+			bool isLegal(Board& board, const Position& newPosition) const;
 
 			/// Get legal moves.
 			/**
@@ -43,7 +43,7 @@ namespace Chess {
 			 * @param board %Board.
 			 * @return A list of all the legal moves.
 			 */
-			std::vector<Position> legalMoves(const Board& board) const;
+			std::vector<Position> legalMoves(Board& board) const;
 
 			/// Get possible moves.
 			/**

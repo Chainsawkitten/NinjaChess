@@ -16,7 +16,7 @@ namespace Chess {
 		position = newPosition;
 	}
 
-	bool Piece::isLegal(const Board& board, const Position& newPosition) const {
+	bool Piece::isLegal(Board& board, const Position& newPosition) const {
 		std::vector<Position> moves = legalMoves(board);
 		for (const Position move : moves) {
 			if (newPosition == move)
@@ -26,12 +26,17 @@ namespace Chess {
 		return false;
 	}
 
-	std::vector<Position> Piece::legalMoves(const Board& board) const {
+	std::vector<Position> Piece::legalMoves(Board& board) const {
 		std::vector<Position> potentialMoves = moves(board);
+		std::vector<Position> legalMoves;
 
-		// TODO: Remove moves that leave the king in check.
+		// Remove moves that leave the king in check.
+		for (Position move : potentialMoves) {
+			if (!board.willLeaveKingChecked(position, move))
+				legalMoves.push_back(move);
+		}
 
-		return potentialMoves;
+		return legalMoves;
 	}
 
 	std::vector<Position> Piece::moves(const Board& board) const {
