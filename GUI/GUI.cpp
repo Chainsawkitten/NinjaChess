@@ -4,6 +4,8 @@
 #include "Bishop.h"
 #include "Knight.h"
 
+#include <ctype.h>
+
 
 using namespace sf;
 using namespace Chess;
@@ -73,8 +75,7 @@ namespace GUI {
 						board.move(selection, tempPos);
 						lastMovedPiece = selectedPiece;
 						selected = false;
-					}
-					else if (tempPiece != nullptr) {
+					} else if (tempPiece != nullptr) {
 						if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 							return;
 						else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
@@ -83,8 +84,7 @@ namespace GUI {
 						selected = true;
 						highlights = tempPiece->legalMoves(board);
 					}
-				}
-				else if (tempPiece != nullptr) {
+				} else if (tempPiece != nullptr) {
 					if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 						return;
 					else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
@@ -95,8 +95,10 @@ namespace GUI {
 				}
 			}
 		}
-		if (board.signalPromote() == true)
+
+		if (board.signalPromote())
 			showPromoteWindow = true;
+
 		mousePressed = pressed;
 	}
 
@@ -161,12 +163,15 @@ namespace GUI {
 			}
 		}
 
-		char tempPromotes[4] = { 'q', 'R', 'B', 'n' };
+		text.setCharacterSize(height / 2);
+		char promoteNotation[4] = { 'q', 'r', 'b', 'n' };
 		for (int x = 0; x < 2; x++) {
 			for (int y = 0; y < 2; y++) {
-				text.setCharacterSize(height / 2);
 				text.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
-				text.setString(notationMap[tempPromotes[y*2 + x]]);
+				char notation = promoteNotation[y * 2 + x];
+				if (lastMovedPiece->isWhite())
+					notation = toupper(notation);
+				text.setString(notationMap[notation]);
 				window->draw(text);
 			}
 		}
