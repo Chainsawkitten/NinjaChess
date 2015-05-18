@@ -98,7 +98,7 @@ namespace Chess {
 						}
 					}
 
-					//Castling
+					// Castling
 					if (piece->notation() == 'k' || piece->notation() == 'K') {
 						if (newPosition.x - oldPosition.x == 2){
 							Piece* tempPiece = getPiece(Position(7, newPosition.y));
@@ -171,10 +171,6 @@ namespace Chess {
 	}
 
 	King* Board::getKing(bool white) const {
-		if (white) {
-			return whiteKing;
-		} else {
-			return blackKing;
-		}
+		return white ? whiteKing : blackKing;
 	}
 }
