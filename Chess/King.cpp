@@ -34,7 +34,7 @@ namespace Chess {
 
 		// Check opponent's king.
 		for (int x = position.x - 1; x <= position.x + 1; x++) {
-			for (int y = position.y - 1; y <= position.x + 1; y++) {
+			for (int y = position.y - 1; y <= position.y + 1; y++) {
 				if (Position(x, y).valid()) {
 					Piece* piece = board.getPiece(Position(x, y));
 					if (piece != nullptr && piece->isWhite() != isWhite() && (piece->notation() == 'k' || piece->notation() == 'K'))
