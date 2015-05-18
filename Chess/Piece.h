@@ -35,14 +35,23 @@ namespace Chess {
 			 * @param newPosition %Position to move to.
 			 * @return Whether it's a legal move
 			 */
-			bool isLegal(const Board& board, const Position& newPosition) const;
+			bool isLegal(Board& board, const Position& newPosition) const;
 
 			/// Get legal moves.
 			/**
+			 * Makes sure the move won't leave the king in check.
 			 * @param board %Board.
 			 * @return A list of all the legal moves.
 			 */
-			virtual std::vector<Position> legalMoves(const Board& board) const;
+			std::vector<Position> legalMoves(Board& board) const;
+
+			/// Get possible moves.
+			/**
+			 * Gets moves without checking if it'll leave the king in check.
+			 * @param board %Board.
+			 * @return A lost of all potential moves.
+			 */
+			virtual std::vector<Position> moves(const Board& board) const;
 
 			/// Get the notation of the piece.
 			/**

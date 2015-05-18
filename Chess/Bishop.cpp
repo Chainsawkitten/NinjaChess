@@ -5,7 +5,7 @@ namespace Chess {
 	Bishop::Bishop(const Position& position, bool white) : Piece(position, white) {
 	}
 
-	std::vector<Position> Bishop::legalMoves(const Board& board) const {
+	std::vector<Position> Bishop::moves(const Board& board) const {
 		std::vector<Position> moves;
 
 		for (int i = -1; i < 2; i += 2) {

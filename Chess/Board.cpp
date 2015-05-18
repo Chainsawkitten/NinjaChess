@@ -48,10 +48,8 @@ namespace Chess {
 		pieces[3][0] = new Queen(Position(3, 0), true);
 
 		// Kings
-		blackKing = new King(Position(4, 7), false);
-		pieces[4][7] = blackKing;
-		whiteKing = new King(Position(4, 0), true);
-		pieces[4][0] = whiteKing;
+		pieces[4][7] = new King(Position(4, 7), false);
+		pieces[4][0] = new King(Position(4, 0), true);
 	}
 
 	Board::~Board() {
@@ -154,6 +152,52 @@ namespace Chess {
 		return false;
 	}
 
+	bool Board::willLeaveKingChecked(const Position& oldPosition, const Position& newPosition) {
+		Piece* oldPiece = getPiece(oldPosition);
+		Piece* newPiece = getPiece(newPosition);
+
+		Piece* piece;
+		switch (oldPiece->notation()) {
+		case 'Q':
+		case 'q':
+			piece = new Queen(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		case 'K':
+		case 'k':
+			piece = new King(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		case 'P':
+		case 'p':
+			piece = new Pawn(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		case 'R':
+		case 'r':
+			piece = new Rook(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		case 'B':
+		case 'b':
+			piece = new Bishop(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		case 'N':
+		case 'n':
+			piece = new Knight(oldPiece->getPosition(), oldPiece->isWhite());
+			break;
+		}
+
+		pieces[newPosition.x][newPosition.y] = piece;
+		piece->move(newPosition);
+		pieces[oldPosition.x][oldPosition.y] = nullptr;
+
+		King* king = getKing((turn % 2 == 0));
+		bool checked = king->isChecked(*this);
+
+		delete piece;
+		pieces[newPosition.x][newPosition.y] = newPiece;
+		pieces[oldPosition.x][oldPosition.y] = oldPiece;
+
+		return checked;
+	}
+
 	void Board::promotePawn(Piece* pawn, PromoteTypes type) {
 		Position position = pawn->getPosition();
 		bool white = pawn->isWhite();
@@ -210,6 +254,14 @@ namespace Chess {
 	}
 
 	King* Board::getKing(bool white) const {
-		return white ? whiteKing : blackKing;
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Piece* piece = getPiece(Position(x, y));
+				if (piece != nullptr && piece->notation() == (white ? 'K' : 'k'))
+					return dynamic_cast<King*>(piece);
+			}
+		}
+
+		return nullptr;
 	}
 }
