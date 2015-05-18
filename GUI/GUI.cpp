@@ -106,6 +106,7 @@ namespace GUI {
 			if (event.type == Event::Closed)
 				window->close();
 		}
+
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
@@ -163,14 +164,13 @@ namespace GUI {
 				window->draw(square);
 			}
 		}
+
 		char tempPromotes[4] = { 'q', 'R', 'B', 'n' };
-		int i = 0;
 		for (int x = 0; x < 2; x++) {
 			for (int y = 0; y < 2; y++) {
 				text.setCharacterSize(height / 2);
 				text.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
-				text.setString(notationMap[tempPromotes[i]]);
-				i++;
+				text.setString(notationMap[tempPromotes[y*2 + x]]);
 				window->draw(text);
 			}
 		}
