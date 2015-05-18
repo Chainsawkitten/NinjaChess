@@ -20,7 +20,7 @@ namespace Chess {
 		return isWhite() ? 'R' : 'r';
 	}
 
-	std::vector<Position> Rook::legalMoves(const Board& board) const {
+	std::vector<Position> Rook::moves(const Board& board) const {
 		std::vector<Position> moves;
 
 		for (int i = 0; i < 4; i++) {

@@ -21,7 +21,7 @@ namespace Chess {
 
 	}
 
-	std::vector<Position> Pawn::legalMoves(const Board& board) const {
+	std::vector<Position> Pawn::moves(const Board& board) const {
 		std::vector<Position> moves;
 
 		int direction = 0;
@@ -45,7 +45,8 @@ namespace Chess {
 				moves.push_back(newPos);
 			}
 		}
-		//Check case where pawn has the ability to eliminate opposing piece (incl. en passant)
+		
+		// Check case where pawn has the ability to eliminate opposing piece (incl. en passant)
 		for (int j = -1; j < 2;j+=2) {
 			Position enPassantPawn = position;
 			Position newPos = position;

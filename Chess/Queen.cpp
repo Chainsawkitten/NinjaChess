@@ -6,7 +6,7 @@ namespace Chess {
 
 	}
 
-	std::vector<Position> Queen::legalMoves(const Board& board) const {
+	std::vector<Position> Queen::moves(const Board& board) const {
 		std::vector<Position> moves;
 
 		for (int i = -1; i < 2; i += 2) {

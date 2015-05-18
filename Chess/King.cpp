@@ -22,7 +22,7 @@ namespace Chess {
 				Piece *piece = board.getPiece(Position(i, j));
 
 				if (piece != nullptr && isWhite() != piece->isWhite()) {
-					std::vector<Position> moves = piece->legalMoves(board);
+					std::vector<Position> moves = piece->moves(board);
 					for (Position move : moves) {
 						if (move == position)
 							return true;
@@ -37,7 +37,7 @@ namespace Chess {
 		return isWhite() ? 'K' : 'k';
 	}
 
-	std::vector<Position> King::legalMoves(const Board& board) const {
+	std::vector<Position> King::moves(const Board& board) const {
 		std::vector<Position> validPosition;
 		Position tempPosition;
 

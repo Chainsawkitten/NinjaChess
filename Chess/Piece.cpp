@@ -27,6 +27,14 @@ namespace Chess {
 	}
 
 	std::vector<Position> Piece::legalMoves(const Board& board) const {
+		std::vector<Position> potentialMoves = moves(board);
+
+		// TODO: Remove moves that leave the king in check.
+
+		return potentialMoves;
+	}
+
+	std::vector<Position> Piece::moves(const Board& board) const {
 		std::vector<Position> moves;
 
 		return moves;
