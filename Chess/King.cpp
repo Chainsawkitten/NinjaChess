@@ -17,11 +17,12 @@ namespace Chess {
 	}
 
 	bool King::isChecked(const Board& board) const {
-		for (int i = 0; i < 8; i++){
-			for (int j = 0; j < 8; j++){
-				Piece *piece = board.getPiece(Position(i, j));
+		// Check other pieces.
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Piece* piece = board.getPiece(Position(x, y));
 
-				if (piece != nullptr && isWhite() != piece->isWhite()) {
+				if (piece != nullptr && isWhite() != piece->isWhite() && piece->notation() != 'k' && piece->notation() != 'K') {
 					std::vector<Position> moves = piece->moves(board);
 					for (Position move : moves) {
 						if (move == position)
@@ -30,6 +31,16 @@ namespace Chess {
 				}
 			}
 		}
+
+		// Check opponent's king.
+		for (int x = position.x - 1; x <= position.x + 1; x++) {
+			for (int y = position.y - 1; y <= position.x + 1; y++) {
+				Piece* piece = board.getPiece(Position(x, y));
+				if (piece != nullptr && piece->isWhite() != isWhite() && (piece->notation() == 'k' || piece->notation() == 'K'))
+					return true;
+			}
+		}
+
 		return false;
 	}
 
