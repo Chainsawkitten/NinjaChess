@@ -152,11 +152,7 @@ namespace GUI {
 			for (int y = 0; y < 2; y++) {
 				square.setPosition(x * width / 2.f, y * height / 2.f);
 
-				if (selected && selection == Position(x, 1 - y))
-					square.setFillColor(Color::Yellow);
-				else if (selected && highlighted(Position(x, 1 - y)))
-					square.setFillColor(Color::Green);
-				else if ((x + y) % 2 == 0)
+				if ((x + y) % 2 == 0)
 					square.setFillColor(brightSquare);
 				else
 					square.setFillColor(darkSquare);
