@@ -50,8 +50,10 @@ namespace GUI {
 
 			sf::RenderWindow* window;
 			bool showPromoteWindow = false;
-			sf::Font font;
-			sf::Text text;
+			sf::Font chessFont;
+			sf::Font messageFont;
+			sf::Text chessText;
+			sf::Text messageText;
 
 			Chess::Position selection;
 			bool selected;

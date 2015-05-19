@@ -18,11 +18,19 @@ namespace GUI {
 		window = new RenderWindow(VideoMode(width, height), "Ninja Chess");
 		window->setVerticalSyncEnabled(true);
 
-		font.loadFromFile("Resources/stchess.ttf");
+		// Text used to display chess pieces.
+		chessFont.loadFromFile("Resources/stchess.ttf");
 
-		text.setFont(font);
-		text.setCharacterSize(height / 8);
-		text.setColor(Color::Black);
+		chessText.setFont(chessFont);
+		chessText.setCharacterSize(height / 8);
+		chessText.setColor(Color::Black);
+
+		// Text used to display messages (draw, win)
+		messageFont.loadFromFile("Resources/Fine College.ttf");
+
+		messageText.setFont(messageFont);
+		messageText.setCharacterSize(height / 4);
+		messageText.setColor(Color::White);
 
 		notationMap['P'] = "A";
 		notationMap['p'] = "a";
@@ -116,19 +124,19 @@ namespace GUI {
 			Position tempPosition = lastMovedPiece->getPosition();
 			bool tempIsWhite = lastMovedPiece->isWhite();
 			if ((mousePos.x < width / 2.f) && (mousePos.y < height / 2.f)){
-				text.setCharacterSize(height / 8);
+				chessText.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::QUEEN);
 				showPromoteWindow = false;
 			} else if ((mousePos.x > width / 2.f) && (mousePos.y < height / 2.f)){
-				text.setCharacterSize(height / 8);
+				chessText.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::ROOK);
 				showPromoteWindow = false;
 			} else if ((mousePos.x < width / 2.f) && (mousePos.y > height / 2.f)){
-				text.setCharacterSize(height / 8);
+				chessText.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::BISHOP);
 				showPromoteWindow = false;
 			} else if ((mousePos.x > width / 2.f) && (mousePos.y > height / 2.f)){
-				text.setCharacterSize(height / 8);
+				chessText.setCharacterSize(height / 8);
 				board.promotePawn(lastMovedPiece, PromoteTypes::KNIGHT);
 				showPromoteWindow = false;
 			}
@@ -137,20 +145,14 @@ namespace GUI {
 	}
 
 	void GUI::drawMessage(){
-		text.setColor(Color::White);
-		text.setCharacterSize(height / 4);
-		font.loadFromFile("Resources/Fine College.ttf");
-		text.setPosition(Vector2f(0.f, 0.f));
+		messageText.setPosition(Vector2f(0.f, 0.f));
 		if (board.getState() == GameState::BLACKWIN)
-			text.setString("Black wins!");
+			messageText.setString("Black wins!");
 		else if (board.getState() == GameState::WHITEWIN)
-			text.setString("White wins!");
+			messageText.setString("White wins!");
 		else if (board.getState() == GameState::DRAW)
-			text.setString("Draw!");
-		window->draw(text);
-		text.setColor(Color::Black);
-		text.setCharacterSize(height / 8);
-		font.loadFromFile("Resources/stchess.ttf");
+			messageText.setString("Draw!");
+		window->draw(messageText);
 	}
 
 	void GUI::updateMessage(){
@@ -160,11 +162,10 @@ namespace GUI {
 	void GUI::render() {
 		window->clear();
 		drawMessage();
-		if ((showPromoteWindow == false) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
+		if ((!showPromoteWindow) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
 			drawBoard();
 			drawPieces();
-		}
-		else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)){
+		} else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
 			drawPromote();
 		}
 		window->display();
@@ -187,16 +188,16 @@ namespace GUI {
 			}
 		}
 
-		text.setCharacterSize(height / 2);
+		chessText.setCharacterSize(height / 2);
 		char promoteNotation[4] = { 'q', 'r', 'b', 'n' };
 		for (int x = 0; x < 2; x++) {
 			for (int y = 0; y < 2; y++) {
-				text.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
+				chessText.setPosition(Vector2f(x * width / 2.f, (y - 0.2f) * width / 2.f));
 				char notation = promoteNotation[y * 2 + x];
 				if (lastMovedPiece->isWhite())
 					notation = toupper(notation);
-				text.setString(notationMap[notation]);
-				window->draw(text);
+				chessText.setString(notationMap[notation]);
+				window->draw(chessText);
 			}
 		}
 	}
@@ -229,9 +230,9 @@ namespace GUI {
 			for (int y = 0; y < 8; y++) {
 				Piece* piece = board.getPiece(Position(x, 7-y));
 				if (piece != nullptr) {
-					text.setPosition(Vector2f(x * width / 8.f, (y - 0.2f) * width / 8.f));
-					text.setString(notationMap[piece->notation()]);
-					window->draw(text);
+					chessText.setPosition(Vector2f(x * width / 8.f, (y - 0.2f) * width / 8.f));
+					chessText.setString(notationMap[piece->notation()]);
+					window->draw(chessText);
 				}
 			}
 		}
