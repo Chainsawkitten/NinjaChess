@@ -85,9 +85,10 @@ namespace Chess {
 			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
 			void addBoardToMap();
-			bool isThreeFoldRepitition() ; //Checks for threefold repetition of a position
+			bool isThreeFoldRepitition(); //Checks for threefold repetition of a position
 			bool isFiftyMoveSincePawnOrCapture() const; //Checks for fifty moves since capture or pawn move.
 			void checkWin();
+			bool sufficientMaterial() const; // Checks if there's sufficient material for mate.
 			std::map<std::string, int> previousBoards;
 
 			int turn = 0;

@@ -154,6 +154,8 @@ namespace Chess {
 						state = GameState::DRAW;
 					if (isFiftyMoveSincePawnOrCapture())
 						state = GameState::DRAW;
+					if (!sufficientMaterial())
+						state = GameState::DRAW;
 					checkWin();
 					return true;
 				}
@@ -308,6 +310,56 @@ namespace Chess {
 				state = GameState::DRAW;
 			}
 		}
+	}
+
+	bool Board::sufficientMaterial() const {
+		// Get the material on the board.
+		int pieceTypes[6] = { 0 };
+
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Piece* piece = getPiece(Position(x, y));
+				if (piece != nullptr) {
+					switch (piece->notation()) {
+					case 'Q':
+					case 'q':
+						pieceTypes[0]++;
+						break;
+					case 'P':
+					case 'p':
+						pieceTypes[1]++;
+						break;
+					case 'R':
+					case 'r':
+						pieceTypes[2]++;
+						break;
+					case 'N':
+					case 'n':
+						pieceTypes[3]++;
+						break;
+					case 'B':
+					case 'b':
+						pieceTypes[((x + y) % 2 == 0) ? 4 : 5]++;
+						break;
+					}
+				}
+			}
+		}
+
+		// If there's a queen, pawn or rook on the board, there is sufficient material.
+		if (pieceTypes[0] > 0 || pieceTypes[1] > 0 || pieceTypes[2] > 0)
+			return true;
+
+		// If there are 2 or more knights on the board, there is sufficient material.
+		if (pieceTypes[3] > 1)
+			return true;
+
+		// If there are pieces from 2 or more categories (knight, bishop on light square, bishop on dark square), there is sufficient material.
+		if ((pieceTypes[3] > 0) + (pieceTypes[4] > 0) + (pieceTypes[5] > 0) >= 2)
+			return true;
+
+		return false;
+
 	}
 
 	King* Board::getKing(bool white) const {
