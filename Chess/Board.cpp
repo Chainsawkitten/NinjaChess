@@ -274,7 +274,8 @@ namespace Chess {
 
 	bool Board::isThreeFoldRepitition(){
 		if (previousBoards[toFENString(false)] == 3){
-			std::cout << "Threefold repitition\n";
+			//std::cout << "Threefold repitition\n";
+			state = GameState::DRAW;
 			return true;
 		}
 		else

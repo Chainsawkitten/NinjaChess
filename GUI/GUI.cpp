@@ -47,10 +47,11 @@ namespace GUI {
 	}
 
 	void GUI::update() {
-		if (showPromoteWindow == false){
+		updateMessage();
+		if ((showPromoteWindow == false) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS) ){
 			updateGame();
 		}
-		else{
+		else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)){
 			updatePromote();
 		}
 	}
@@ -135,12 +136,35 @@ namespace GUI {
 		mousePressed = pressed;
 	}
 
+	void GUI::drawMessage(){
+		text.setColor(Color::White);
+		text.setCharacterSize(height / 4);
+		font.loadFromFile("Resources/Fine College.ttf");
+		text.setPosition(Vector2f(0.f, 0.f));
+		if (board.getState() == GameState::BLACKWIN)
+			text.setString("Black wins!");
+		else if (board.getState() == GameState::WHITEWIN)
+			text.setString("White wins!");
+		else if (board.getState() == GameState::DRAW)
+			text.setString("Draw!");
+		window->draw(text);
+		text.setColor(Color::Black);
+		text.setCharacterSize(height / 8);
+		font.loadFromFile("Resources/stchess.ttf");
+	}
+
+	void GUI::updateMessage(){
+		return;
+	}
+
 	void GUI::render() {
 		window->clear();
-		if (!showPromoteWindow) {
+		drawMessage();
+		if ((showPromoteWindow == false) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
 			drawBoard();
 			drawPieces();
-		} else {
+		}
+		else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)){
 			drawPromote();
 		}
 		window->display();

@@ -36,6 +36,8 @@ namespace GUI {
 			void drawPieces();
 			void drawPromote();
 			void updateGame();
+			void drawMessage();
+			void updateMessage();
 			void updatePromote();
 			bool highlighted(const Chess::Position& position);
 
