@@ -278,10 +278,8 @@ namespace Chess {
 		return previousBoards[toFENString(false)] == 3;
 	}
 
-	bool Board::isFiftyMoveSincePawnOrCapture() const{
-		if (halfMovesSinceCapture >= 100)
-			return true;
-		return false;
+	bool Board::isFiftyMoveSincePawnOrCapture() const {
+		return halfMovesSinceCapture >= 100;
 	}
 
 	void Board::checkWin() {
