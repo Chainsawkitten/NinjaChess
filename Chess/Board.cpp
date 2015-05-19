@@ -150,7 +150,10 @@ namespace Chess {
 					std::string tempstring = toFENString(false);
 					std::cout << tempstring << '\n';
 					addBoardToMap();
-					isThreeFoldRepitition();
+					if(isThreeFoldRepitition())
+						state = GameState::DRAW;
+					if (isFiftyMoveSincePawnOrCapture())
+						state = GameState::DRAW;
 					checkWin();
 					return true;
 				}
@@ -272,11 +275,14 @@ namespace Chess {
 	}
 
 	bool Board::isThreeFoldRepitition() {
-		if (previousBoards[toFENString(false)] == 3) {
-			state = GameState::DRAW;
+		if (previousBoards[toFENString(false)] == 3)
 			return true;
-		}
-		
+		return false;
+	}
+
+	bool Board::isFiftyMoveSincePawnOrCapture() const{
+		if (halfMovesSinceCapture >= 100)
+			return true;
 		return false;
 	}
 
