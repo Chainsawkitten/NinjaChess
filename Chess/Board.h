@@ -86,6 +86,7 @@ namespace Chess {
 			GameState state = GameState::WHITEPLAYS;
 			void addBoardToMap();
 			bool isThreeFoldRepitition();
+			void checkWin();
 			std::map<std::string, int> previousBoards;
 
 			int turn = 0;

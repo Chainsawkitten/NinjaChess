@@ -151,6 +151,7 @@ namespace Chess {
 					std::cout << tempstring << '\n';
 					addBoardToMap();
 					isThreeFoldRepitition();
+					checkWin();
 					return true;
 				}
 			}
@@ -228,58 +229,83 @@ namespace Chess {
 	}
 	void Board::addBoardToMap() {
 		std::string tempstring = toFENString(false);
-		if (previousBoards.find(tempstring) == previousBoards.end()){
+		if (previousBoards.find(tempstring) == previousBoards.end()) {
 			previousBoards[tempstring] = 0;
-		}
-		else{ 
+		} else{  
 			previousBoards[tempstring] += 1;
 		}
 	}
 
-	std::string Board::toFENString(bool addExtraData) const{
+	std::string Board::toFENString(bool addExtraData) const {
 		std::string tempstring;
 		int emptyCounter = 0;
-		for (int y = 7; y >= 0; y--){
+		for (int y = 7; y >= 0; y--) {
 			for (int x = 0; x < 8; x++){
 				if (pieces[x][y] == nullptr)
 					emptyCounter++;
-				else{
+				else {
 					if (emptyCounter != 0)
 						tempstring += std::to_string(emptyCounter);
 					tempstring.append(1, pieces[x][y]->notation());
 					emptyCounter = 0;
 				}
 			}
-			if (emptyCounter != 0){
+			if (emptyCounter != 0) {
 				tempstring += std::to_string(emptyCounter);
 				emptyCounter = 0;
 			}
 			tempstring += '/';
 		}
-		//Who played the turn?
+		// Who played the turn?
 		if (state == GameState::BLACKPLAYS)
 			tempstring += "w";
 		else
 			tempstring += "b";
 
-		if (addExtraData == true)
-		{
-			//Number of half turns since last capture or pawn move.
+		if (addExtraData) {
+			// Number of half turns since last capture or pawn move.
 			tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
-			//Number of full moves.
+			// Number of full moves.
 			tempstring += std::to_string((turn+1) / 2);
 		}
 		return tempstring;
 	}
 
-	bool Board::isThreeFoldRepitition(){
-		if (previousBoards[toFENString(false)] == 3){
-			//std::cout << "Threefold repitition\n";
+	bool Board::isThreeFoldRepitition() {
+		if (previousBoards[toFENString(false)] == 3) {
 			state = GameState::DRAW;
 			return true;
 		}
-		else
-			return false;
+		
+		return false;
+	}
+
+	void Board::checkWin() {
+		bool white = (state == GameState::WHITEPLAYS);
+
+		bool canMove = false;
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Piece* piece = getPiece(Position(x, y));
+				if (piece != nullptr && piece->isWhite() == white) {
+					if (!piece->legalMoves(*this).empty()) {
+						canMove = true;
+						break;
+					}
+				}
+			}
+		}
+
+		if (!canMove) {
+			if (getKing(white)->isChecked(*this)) {
+				if (white)
+					state = GameState::BLACKWIN;
+				else
+					state = GameState::WHITEWIN;
+			} else {
+				state = GameState::DRAW;
+			}
+		}
 	}
 
 	King* Board::getKing(bool white) const {
