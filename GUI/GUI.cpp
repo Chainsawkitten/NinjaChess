@@ -55,22 +55,21 @@ namespace GUI {
 	}
 
 	void GUI::update() {
-		updateMessage();
-		if ((showPromoteWindow == false) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS) ){
-			updateGame();
-		}
-		else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)){
-			updatePromote();
-		}
-	}
-
-	void GUI::updateGame(){
 		Event event;
 		while (window->pollEvent(event)) {
 			if (event.type == Event::Closed)
 				window->close();
 		}
 
+		updateMessage();
+		if ((!showPromoteWindow) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS) ) {
+			updateGame();
+		} else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
+			updatePromote();
+		}
+	}
+
+	void GUI::updateGame(){
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
 		if (pressed && !mousePressed) {
 			Vector2i mousePos = Mouse::getPosition(*window);
