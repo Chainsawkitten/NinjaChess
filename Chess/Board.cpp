@@ -275,9 +275,7 @@ namespace Chess {
 	}
 
 	bool Board::isThreeFoldRepitition() {
-		if (previousBoards[toFENString(false)] == 3)
-			return true;
-		return false;
+		return previousBoards[toFENString(false)] == 3;
 	}
 
 	bool Board::isFiftyMoveSincePawnOrCapture() const{
