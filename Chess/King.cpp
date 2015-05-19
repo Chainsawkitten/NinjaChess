@@ -80,7 +80,7 @@ namespace Chess {
 						tempPosition.x += k*l;
 						castlingKing.position = tempPosition;
 						if (l == -1) {
-							if (board.getPiece(Position(position.x + 3 * l, position.y)) != nullptr || leftRook->hasMoved() || castlingKing.isChecked(board)) {
+							if (board.getPiece(Position(position.x + 3 * l, position.y)) != nullptr || leftRook == nullptr || leftRook->hasMoved() || castlingKing.isChecked(board)) {
 								leftCastling = false;
 							}
 						} else if (l == 1) {
