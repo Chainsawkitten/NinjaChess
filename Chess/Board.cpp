@@ -267,17 +267,19 @@ namespace Chess {
 			}
 			tempstring += '/';
 		}
+		tempstring += ' ';
 		// Who played the turn?
 		if (state == GameState::BLACKPLAYS)
 			tempstring += "w";
 		else
 			tempstring += "b";
-		tempstring += '/' + std::to_string(enPassantPossible.x) + '.' + std::to_string(enPassantPossible.y);
+		tempstring += ' ' + std::to_string(enPassantPossible.x) + '.' + std::to_string(enPassantPossible.y);
 		if (addExtraData) {
 			// Number of half turns since last capture or pawn move.
-			tempstring += '/' + std::to_string(halfMovesSinceCapture) + '/';
+			tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
 			// Number of full moves.
 			tempstring += std::to_string((turn+1) / 2);
+			tempstring += '#';
 		}
 		return tempstring;
 	}
