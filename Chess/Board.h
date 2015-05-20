@@ -81,6 +81,7 @@ namespace Chess {
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
 			int halfMovesSinceCapture = 0;
+			Position enPassantPossible = Position(-1,-1);
 			King* whiteKing;
 			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
