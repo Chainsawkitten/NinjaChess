@@ -144,7 +144,8 @@ namespace GUI {
 	}
 
 	void GUI::drawMessage(){
-		messageText.setPosition(Vector2f(0.f, 0.f));
+		messageText.setPosition(Vector2f(width/3.0f,height/3.0f));
+		messageText.setCharacterSize(25);
 		if (board.getState() == GameState::BLACKWIN)
 			messageText.setString("Black wins!");
 		else if (board.getState() == GameState::WHITEWIN)
