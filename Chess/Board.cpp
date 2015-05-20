@@ -281,9 +281,8 @@ namespace Chess {
 			tempstring += "w";
 		else
 			tempstring += "b";
-
+		tempstring += '/' + std::to_string(enPassantPossible.x) + '.' + std::to_string(enPassantPossible.y);
 		if (addExtraData) {
-			tempstring += '/' + std::to_string(enPassantPossible.x) + '.' + std::to_string(enPassantPossible.y);
 			// Number of half turns since last capture or pawn move.
 			tempstring += '/' + std::to_string(halfMovesSinceCapture) + '/';
 			// Number of full moves.
