@@ -161,7 +161,7 @@ namespace Chess {
 					else
 						state = GameState::BLACKPLAYS;
 
-					std::string tempstring = toFENString(false);
+					std::string tempstring = toFENString(true);
 					std::cout << tempstring << '\n';
 					addBoardToMap();
 					if(isThreeFoldRepitition())
@@ -283,8 +283,9 @@ namespace Chess {
 			tempstring += "b";
 
 		if (addExtraData) {
+			tempstring += '/' + std::to_string(enPassantPossible.x) + '.' + std::to_string(enPassantPossible.y);
 			// Number of half turns since last capture or pawn move.
-			tempstring += ' ' + std::to_string(halfMovesSinceCapture) + ' ';
+			tempstring += '/' + std::to_string(halfMovesSinceCapture) + '/';
 			// Number of full moves.
 			tempstring += std::to_string((turn+1) / 2);
 		}
