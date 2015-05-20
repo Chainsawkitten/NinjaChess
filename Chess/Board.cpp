@@ -132,6 +132,14 @@ namespace Chess {
 							needsToPromote = true;
 						}
 					}
+					if (abs(piece->getPosition().y - newPosition.y) == 2){
+						if (piece->notation() == 'p')
+							enPassantPossible = Position(piece->getPosition().x, piece->getPosition().y - 1);
+						else if (piece->notation() == 'P')
+							enPassantPossible = Position(piece->getPosition().x, piece->getPosition().y + 1);
+					}
+					printf("En passant possible at:\n X:%d, Y:%d\n", piece->getPosition().x, piece->getPosition().y);
+
 
 					// Set and reset lastMovedPiece
 					if (lastMovedPawn != nullptr){
