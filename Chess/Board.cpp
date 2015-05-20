@@ -143,17 +143,12 @@ namespace Chess {
 					else {
 						enPassantPossible = Position(-1, -1);
 					}
-					
-					printf("En passant possible at:\n X:%d, Y:%d\n", enPassantPossible.x, enPassantPossible.y);
 
 					turn++;
 					if (state == GameState::BLACKPLAYS)
 						state = GameState::WHITEPLAYS;
 					else
 						state = GameState::BLACKPLAYS;
-
-					std::string tempstring = toFENString(true);
-					std::cout << tempstring << '\n';
 					addBoardToMap();
 					if(isThreeFoldRepitition())
 						state = GameState::DRAW;
