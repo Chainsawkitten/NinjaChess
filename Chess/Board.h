@@ -76,6 +76,12 @@ namespace Chess {
 			*/
 			std::string toFENString(bool addExtraData) const;
 
+			/// Get enPassantPossible
+			/**
+			*	@return position of valid en passant move
+			*/
+			Position getEnPassantPossible()const;
+
 		private:
 			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];

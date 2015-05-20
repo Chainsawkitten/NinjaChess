@@ -4,18 +4,10 @@
 namespace Chess {
 	Pawn::Pawn(const Position& position, bool white) : Piece(position, white) {
 		_hasMoved = false;
-		lastMoveWasDouble = false;
 	}
 
 	void Pawn::move(const Position& newPosition) {
 		_hasMoved = true;
-
-		int distanceMoved = abs(position.y - newPosition.y);
-		if (distanceMoved == 2){
-			lastMoveWasDouble = true;
-		} else {
-			lastMoveWasDouble = false;
-		}
 		position = newPosition;
 	}
 
@@ -46,10 +38,7 @@ namespace Chess {
 		
 		// Check case where pawn has the ability to eliminate opposing piece (incl. en passant)
 		for (int j = -1; j < 2;j+=2) {
-			Position enPassantPawn = position;
 			Position newPos = position;
-
-			enPassantPawn.x += j;
 			newPos.y += direction;
 			newPos.x += j;
 
@@ -58,26 +47,13 @@ namespace Chess {
 				if (temp != nullptr && temp->isWhite() != isWhite()) {
 					moves.push_back(newPos);
 				}
-			}
-			if (enPassantPawn.valid()) {
-				Pawn* tempEnPassant = dynamic_cast<Pawn *>(board.getPiece(enPassantPawn));
-				if (tempEnPassant != nullptr && tempEnPassant->lastMoveWasDouble 
-					&& ((enPassantPawn.y == 4 && isWhite()) || (enPassantPawn.y == 3 && !isWhite())) && tempEnPassant->isWhite()!=isWhite()) {
-					enPassantPawn.y += direction;
-					moves.push_back(enPassantPawn);
+				if (board.getEnPassantPossible() == newPos) {
+					moves.push_back(newPos);
 				}
 			}
 		}
 
 		return moves;
-	}
-
-	void Pawn::resetLastMoveWasDouble(){
-		lastMoveWasDouble = false;
-	}
-
-	bool Pawn::getLastMoveWasDouble()const{
-		return lastMoveWasDouble;
 	}
 
 	char Pawn::notation() const {

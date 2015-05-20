@@ -88,7 +88,7 @@ namespace Chess {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
 					// En passant.
-					if (pieces[newPosition.x][newPosition.y] == nullptr && (piece->notation() == 'p' || piece->notation() == 'P') && newPosition.x != oldPosition.x){
+					if (newPosition == enPassantPossible && (piece->notation() == 'p' || piece->notation() == 'P')){
 						if (piece->isWhite()) {
 							delete pieces[newPosition.x][newPosition.y - 1];
 							pieces[newPosition.x][newPosition.y - 1] = nullptr;
@@ -145,15 +145,6 @@ namespace Chess {
 					}
 					
 					printf("En passant possible at:\n X:%d, Y:%d\n", enPassantPossible.x, enPassantPossible.y);
-
-
-					// Set and reset lastMovedPiece
-					if (lastMovedPawn != nullptr){
-						if (lastMovedPawn->getLastMoveWasDouble()){
-							//lastMovedPawn->resetLastMoveWasDouble(); //orsakar krasch..
-						}
-					}
-					lastMovedPawn = dynamic_cast<Pawn*>(getPiece(newPosition));
 
 					turn++;
 					if (state == GameState::BLACKPLAYS)
@@ -387,5 +378,8 @@ namespace Chess {
 		}
 
 		return nullptr;
+	}
+	Position Board::getEnPassantPossible()const{
+		return enPassantPossible;
 	}
 }
