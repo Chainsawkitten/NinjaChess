@@ -35,12 +35,6 @@ namespace Chess {
 			 */
 			void move(const Position& newPosition);
 
-			/// Tests if castling results in passing or landing on a check
-			/**
-			 * @param right or left rook selection for castling
-			 */
-			bool castlingTest(bool right) const;
-
 			/// Get possible moves.
 			/**
 			 * Gets moves without checking if it'll leave the king in check.
