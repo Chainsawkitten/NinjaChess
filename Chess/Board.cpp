@@ -230,6 +230,7 @@ namespace Chess {
 			pieces[position.x][position.y] = new Knight(position, white);
 			break;
 		}
+		checkWin();
 		needsToPromote = false;
 	}
 	void Board::addBoardToMap() {
