@@ -83,7 +83,6 @@ namespace Chess {
 			Position getEnPassantPossible()const;
 
 		private:
-			Pawn* lastMovedPawn = nullptr;
 			Piece* pieces[8][8];
 			bool needsToPromote = false;
 			int halfMovesSinceCapture = 0;
