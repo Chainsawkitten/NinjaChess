@@ -62,6 +62,7 @@ namespace GUI {
 		}
 
 		updateMessage();
+		//Checks to see if we are going to show the promote window or the regular window
 		if ((!showPromoteWindow) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS) ) {
 			updateGame();
 		} else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
@@ -75,15 +76,15 @@ namespace GUI {
 			Vector2i mousePos = Mouse::getPosition(*window);
 			Position tempPos(mousePos.x * 8 / width, mousePos.y * 8 / height);
 			tempPos.y = 7 - tempPos.y;
-			if (tempPos.valid()) {
+			if (tempPos.valid()) { //Checks to see if the position is within the bounds of the board.
 				Piece* tempPiece = board.getPiece(tempPos);
-				if (selected) {
+				if (selected) { //If we have already selected a piece, and click on the board again, the piece should move.
 					Piece* selectedPiece = board.getPiece(selection);
 					if (selectedPiece->isLegal(board, tempPos)) {
 						board.move(selection, tempPos);
 						lastMovedPiece = selectedPiece;
 						selected = false;
-					} else if (tempPiece != nullptr) {
+					} else if (tempPiece != nullptr) { //Prevent selecting of opponent pieces.
 						if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 							return;
 						else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
@@ -92,7 +93,7 @@ namespace GUI {
 						selected = true;
 						highlights = tempPiece->legalMoves(board);
 					}
-				} else if (tempPiece != nullptr) {
+				} else if (tempPiece != nullptr) { //If we haven't already selected a piece, then we should select it.
 					if (tempPiece->isWhite() && (board.getState() == GameState::BLACKPLAYS))
 						return;
 					else if (!tempPiece->isWhite() && (board.getState() == GameState::WHITEPLAYS))
@@ -118,6 +119,7 @@ namespace GUI {
 		}
 
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
+		//Checks to see if the player selects any of the available options for promotion
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
 			Position tempPosition = lastMovedPiece->getPosition();
