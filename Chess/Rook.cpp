@@ -22,7 +22,7 @@ namespace Chess {
 
 	std::vector<Position> Rook::moves(const Board& board) const {
 		std::vector<Position> moves;
-
+		//Check the four directions that a rook can move in.
 		for (int i = 0; i < 4; i++) {
 			int num = i % 2 == 0 ? position.x : position.y;
 			int way = 1 + (-2 * (i < 2));

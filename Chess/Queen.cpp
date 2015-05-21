@@ -9,6 +9,7 @@ namespace Chess {
 	std::vector<Position> Queen::moves(const Board& board) const {
 		std::vector<Position> moves;
 
+		//Check diagonal moves
 		for (int i = -1; i < 2; i += 2) {
 			for (int j = -1; j < 2; j += 2) {
 				int tempX = i;
@@ -35,6 +36,7 @@ namespace Chess {
 			}
 		}
 
+		//Check vertical and horizontal moves
 		for (int i = 0; i < 4; i++) {
 			int num = i % 2 == 0 ? position.x : position.y;
 			int way = 1 + (-2 * (i < 2));

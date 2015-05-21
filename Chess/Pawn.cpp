@@ -31,7 +31,7 @@ namespace Chess {
 				moves.push_back(newPos);
 			} else if (temp != nullptr){
 				break;
-			} else if((i==2) && (!_hasMoved)) {
+			} else if((i==2) && (!_hasMoved)) { //Disable the pawns ability to move double if it has already moved once.
 				moves.push_back(newPos);
 			}
 		}
