@@ -31,36 +31,36 @@ namespace GUI {
 			/// Render the %GUI.
 			void render();
 
-		private:
-			void drawBoard();
-			void drawPieces();
-			void drawPromote();
-			void updateGame();
-			void drawMessage();
-			void updateMessage();
-			void updatePromote();
-			bool highlighted(const Chess::Position& position);
+			private:
+				void drawBoard();											//Draws the board
+				void drawPieces();											//Draws the pieces on top of the board.
+				void drawPromote();											//Draws the promote window
+				void updatePromote();										//Updates the promote window
+				void updateGame();											//Updates the game
+				void drawMessage();											//Draws a message (win, lose, draw)
+				void updateMessage();										//Updates the message (Does nothing right now)
+				bool highlighted(const Chess::Position& position);			//Returns wheter a position is highlighted
 
-			int width, height;
-			Chess::Board& board;
+				int width, height;
+				Chess::Board& board;
 
-			Chess::Piece* lastMovedPiece = nullptr;
+				Chess::Piece* lastMovedPiece = nullptr;
 
-			std::map<char, const char*> notationMap;
+				std::map<char, const char*> notationMap;					//Map that contains FEN-notation to font alphabet
 
-			sf::RenderWindow* window;
-			bool showPromoteWindow = false;
-			sf::Font chessFont;
-			sf::Font messageFont;
-			sf::Text chessText;
-			sf::Text messageText;
+				sf::RenderWindow* window;
+				bool showPromoteWindow = false;
+				sf::Font chessFont;
+				sf::Font messageFont;
+				sf::Text chessText;
+				sf::Text messageText;
 
-			Chess::Position selection;
-			bool selected;
-			bool mousePressed;
+				Chess::Position selection;
+				bool selected;
+				bool mousePressed;
 
-			std::vector<Chess::Position> highlights;
-	};
+				std::vector<Chess::Position> highlights;					//Contains all the positions that are highlighted
+			};
 }
 
 #endif
