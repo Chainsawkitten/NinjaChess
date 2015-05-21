@@ -87,8 +87,6 @@ namespace Chess {
 			bool needsToPromote = false;
 			int halfMovesSinceCapture = 0;
 			Position enPassantPossible = Position(-1,-1);
-			King* whiteKing;
-			King* blackKing;
 			GameState state = GameState::WHITEPLAYS;
 			void addBoardToMap();
 			bool isThreeFoldRepitition(); //Checks for threefold repetition of a position
@@ -96,7 +94,6 @@ namespace Chess {
 			void checkWin();
 			bool sufficientMaterial() const; // Checks if there's sufficient material for mate.
 			std::map<std::string, int> previousBoards;
-
 			int turn = 0;
 	};
 }
