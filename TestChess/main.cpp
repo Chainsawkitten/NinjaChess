@@ -66,7 +66,7 @@ void printBoard(const Chess::Board& board) {
 	}
 }
 
-void printLegalMoves(const Chess::Board& board, const Chess::Position& position) {
+void printLegalMoves(Chess::Board& board, const Chess::Position& position) {
 	Chess::Piece* piece = board.getPiece(position);
 
 	if (piece == nullptr) {

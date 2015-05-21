@@ -17,6 +17,6 @@ void printBoard(const Chess::Board& board);
  * @parma board %Board.
  * @param position %Piece position.
  */
-void printLegalMoves(const Chess::Board& board, const Chess::Position& position);
+void printLegalMoves(Chess::Board& board, const Chess::Position& position);
 
 #endif
