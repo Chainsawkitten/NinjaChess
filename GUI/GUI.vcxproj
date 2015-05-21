@@ -83,7 +83,7 @@ copy /y "$(SolutionDir)SFML-2.2\bin\sfml-window-d-2.dll" "$(OutDir)sfml-window-d
       <AdditionalIncludeDirectories>..\SFML-2.2\include;..\Chess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>

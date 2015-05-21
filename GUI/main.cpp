@@ -1,5 +1,6 @@
 #include "GUI.h"
 #include <Board.h>
+#include <Windows.h>
 
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 400
@@ -16,4 +17,8 @@ int main() {
 	}
 
 	return EXIT_SUCCESS;
+}
+
+int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nCmdShow){
+	main();
 }
