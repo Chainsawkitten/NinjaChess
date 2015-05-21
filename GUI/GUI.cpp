@@ -62,6 +62,7 @@ namespace GUI {
 		}
 
 		updateMessage();
+		//Checks to see if we are going to show the promote window or the regular window
 		if ((!showPromoteWindow) && (board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS) ) {
 			updateGame();
 		} else if ((board.getState() == GameState::BLACKPLAYS || board.getState() == GameState::WHITEPLAYS)) {
@@ -118,6 +119,7 @@ namespace GUI {
 		}
 
 		bool pressed = Mouse::isButtonPressed(Mouse::Left);
+		//Checks to see if the player selects any of the available options for promotion
 		if (pressed && !mousePressed){
 			Vector2i mousePos = Mouse::getPosition(*window);
 			Position tempPosition = lastMovedPiece->getPosition();
