@@ -83,17 +83,17 @@ namespace Chess {
 			Position getEnPassantPossible()const;
 
 		private:
-			Piece* pieces[8][8];
-			bool needsToPromote = false;
-			int halfMovesSinceCapture = 0;
-			Position enPassantPossible = Position(-1,-1);
-			GameState state = GameState::WHITEPLAYS;
-			void addBoardToMap();
-			bool isThreeFoldRepitition(); //Checks for threefold repetition of a position
-			bool isFiftyMoveSincePawnOrCapture() const; //Checks for fifty moves since capture or pawn move.
+			Piece* pieces[8][8];							//A representation of the board as a 8x8 array of pieces.
+			bool needsToPromote = false;					
+			int halfMovesSinceCapture = 0;					//Stores how many half-moves have been made since last capture.
+			Position enPassantPossible = Position(-1,-1);	//Stores the location where en-passant is possible
+			GameState state = GameState::WHITEPLAYS;		//The games state.
+			void addBoardToMap();							//Adds board as a FEN-notated string to the previousBoards map.
+			bool isThreeFoldRepitition();					//Checks for threefold repetition of a position.
+			bool isFiftyMoveSincePawnOrCapture() const;		//Checks for fifty moves since capture or pawn move.
 			void checkWin();
-			bool sufficientMaterial() const; // Checks if there's sufficient material for mate.
-			std::map<std::string, int> previousBoards;
+			bool sufficientMaterial() const;				// Checks if there's sufficient material for mate.
+			std::map<std::string, int> previousBoards;		//Stores previous board in order to check for threefold repetition.
 			int turn = 0;
 	};
 }
