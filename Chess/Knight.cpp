@@ -8,16 +8,14 @@ namespace Chess {
 
 	std::vector<Position> Knight::moves(const Board& board) const {
 		std::vector<Position> moves, testMoves;
-		testMoves.push_back(Position(position.x + 1, position.y + 2));
-		testMoves.push_back(Position(position.x - 1, position.y + 2));
-		testMoves.push_back(Position(position.x + 1, position.y - 2));
-		testMoves.push_back(Position(position.x - 1, position.y - 2));
-
-		testMoves.push_back(Position(position.x + 2, position.y + 1));
-		testMoves.push_back(Position(position.x + 2, position.y - 1));
-		testMoves.push_back(Position(position.x - 2, position.y + 1));
-		testMoves.push_back(Position(position.x - 2, position.y - 1));
+		for (int i = -1; i < 2; i += 2){
+			for (int j = -2; j < 3; j += 4){
+				testMoves.push_back(Position(position.x + i, position.y + j));
+				testMoves.push_back(Position(position.x + j, position.y + i));
+			}
+		}
 		for (auto move : testMoves) {
+			//if the position is not occupied by allied piece, it is legal
 			if (move.valid() && ((board.getPiece(move) == nullptr) || (isWhite() != board.getPiece(move)->isWhite())))
 				moves.push_back(move);
 		}

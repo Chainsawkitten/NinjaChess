@@ -9,6 +9,7 @@ namespace Chess {
 	std::vector<Position> Queen::moves(const Board& board) const {
 		std::vector<Position> moves;
 
+		//Check moves (combining the movement set of rook and bishop)
 		for (int i = -1; i < 2; i += 2) {
 			for (int j = -1; j < 2; j += 2) {
 				int tempX = i;

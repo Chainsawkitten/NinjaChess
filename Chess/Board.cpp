@@ -87,7 +87,8 @@ namespace Chess {
 				if (piece->isLegal(*this, newPosition)) {
 					pieces[oldPosition.x][oldPosition.y] = nullptr;
 
-					// En passant.
+					//En passant.
+					//if we move to a valid en passant position with a pawn, it's an 'en passant' move
 					if (newPosition == enPassantPossible && (piece->notation() == 'p' || piece->notation() == 'P')){
 						if (piece->isWhite()) {
 							delete pieces[newPosition.x][newPosition.y - 1];
@@ -101,12 +102,15 @@ namespace Chess {
 					}
 
 					// Castling
+					//if we move a king two spaces, it's a castling move
 					if (piece->notation() == 'k' || piece->notation() == 'K') {
+						//Right rook castling
 						if (newPosition.x - oldPosition.x == 2){
 							Piece* tempPiece = getPiece(Position(7, newPosition.y));
 							pieces[7][newPosition.y] = nullptr;
 							pieces[5][newPosition.y] = tempPiece;
 							tempPiece->move(Position(5, newPosition.y));
+						//Left rook castling
 						} else if (newPosition.x - oldPosition.x == -2) {
 							Piece* tempPiece = getPiece(Position(0, newPosition.y));
 							pieces[0][newPosition.y] = nullptr;
@@ -132,6 +136,7 @@ namespace Chess {
 							needsToPromote = true;
 						}
 					}
+					// Note that a pawn has moved two spaced, and that 'en passant' is available behind said piece.
 					if ( (piece->notation() == 'p' || piece->notation() == 'P') ){
 						if (abs(oldPosition.y - newPosition.y) == 2) {
 							if (piece->notation() == 'p')
@@ -140,11 +145,14 @@ namespace Chess {
 								enPassantPossible = Position(newPosition.x, newPosition.y - 1); 
 						}
 					}
+					// Otherwise 'en passant' is unavailable
 					else {
 						enPassantPossible = Position(-1, -1);
 					}
 
+					//Keep track of the number of turns
 					turn++;
+					//Update state
 					if (state == GameState::BLACKPLAYS)
 						state = GameState::WHITEPLAYS;
 					else
@@ -156,6 +164,7 @@ namespace Chess {
 						state = GameState::DRAW;
 					if (!sufficientMaterial())
 						state = GameState::DRAW;
+					//Check if this turn achieved win conditions
 					checkWin();
 					return true;
 				}
@@ -170,6 +179,7 @@ namespace Chess {
 		Piece* newPiece = getPiece(newPosition);
 
 		Piece* piece;
+		//What type of piece are we dealing with? make a copy of the piece
 		switch (oldPiece->notation()) {
 		case 'Q':
 		case 'q':
@@ -196,18 +206,21 @@ namespace Chess {
 			piece = new Knight(oldPiece->getPosition(), oldPiece->isWhite());
 			break;
 		}
-
+		//Move the copied piece to new location (and temporarily update board)
 		pieces[newPosition.x][newPosition.y] = piece;
 		piece->move(newPosition);
 		pieces[oldPosition.x][oldPosition.y] = nullptr;
 
+		//Check if the move results in check
 		King* king = getKing((turn % 2 == 0));
 		bool checked = king->isChecked(*this);
 
+		//Restore the board to point to the original piece and delete the temporary
 		delete piece;
 		pieces[newPosition.x][newPosition.y] = newPiece;
 		pieces[oldPosition.x][oldPosition.y] = oldPiece;
 
+		//Return if the move results in check or not (i.e if it is valid or not)
 		return checked;
 	}
 
@@ -216,6 +229,7 @@ namespace Chess {
 		bool white = pawn->isWhite();
 		delete pawn;
 
+		//Change the pawn to desired type according to PromoteType
 		switch (type) {
 		case PromoteTypes::QUEEN:
 			pieces[position.x][position.y] = new Queen(position, white);
@@ -230,6 +244,10 @@ namespace Chess {
 			pieces[position.x][position.y] = new Knight(position, white);
 			break;
 		}
+
+		/*Check if promoting the pawn results in a win 
+		(Because the pawn is promoted in the GUI and win condition is checked in the board
+		an extra check must be added to prevent an unregistered check-mate)*/
 		checkWin();
 		needsToPromote = false;
 	}
@@ -290,6 +308,7 @@ namespace Chess {
 	void Board::checkWin() {
 		bool white = (state == GameState::WHITEPLAYS);
 
+		//Check if any of your pieces are able to move
 		bool canMove = false;
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
@@ -302,7 +321,7 @@ namespace Chess {
 				}
 			}
 		}
-
+		//If not, you lose.
 		if (!canMove) {
 			if (getKing(white)->isChecked(*this)) {
 				if (white)
@@ -366,6 +385,7 @@ namespace Chess {
 	}
 
 	King* Board::getKing(bool white) const {
+		//Go through board and return the desired king
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 				Piece* piece = getPiece(Position(x, y));

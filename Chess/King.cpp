@@ -54,10 +54,12 @@ namespace Chess {
 		std::vector<Position> validPosition;
 		Position tempPosition;
 
+		//Check the space around the king for default moves
 		for (int i = 0; i < 3; i++) {
 			tempPosition.x = this->position.x - 1 + i;
 			for (int j = 0; j < 3; j++) {
 				tempPosition.y = this->position.y - 1 + j;
+				//if the space is valid and not occupied by an ally it is a legal move
 				if (tempPosition.valid() && 
 					( ( board.getPiece(tempPosition) == nullptr ) || (board.getPiece(tempPosition)->isWhite() != this->isWhite()) ) )
 					validPosition.push_back(tempPosition);
@@ -73,16 +75,19 @@ namespace Chess {
 			King castlingKing = King(position,isWhite());
 
 			for (int l = -1; l < 2; l += 2) {
+				//Check if the spaces (2) between king and rook is un-occupied
 				if (board.getPiece(Position(position.x + 1 * l, position.y)) == nullptr
 					&& board.getPiece(Position(position.x + 2 * l, position.y)) == nullptr) {
 					for (int k = 1; k < 3; k++) {
 						Position tempPosition = position;
 						tempPosition.x += k*l;
 						castlingKing.position = tempPosition;
+						//Check if the extra space between left rook and king is occupied (and remaining casling conditions)
 						if (l == -1) {
 							if (board.getPiece(Position(position.x + 3 * l, position.y)) != nullptr || leftRook == nullptr || leftRook->hasMoved() || castlingKing.isChecked(board)) {
 								leftCastling = false;
 							}
+						//Check remaining castling conditions for right rook castling
 						} else if (l == 1) {
 							if (rightRook == nullptr || rightRook->hasMoved() || castlingKing.isChecked(board)) {
 								rightCastling = false;
@@ -97,6 +102,7 @@ namespace Chess {
 					}
 				}
 			}
+			//if castling is valid push the position (+ or -) 2 on the x-axis as legal.
 			if (leftCastling)
 				validPosition.push_back(Position(position.x - 2, position.y));
 
